@@ -69,6 +69,10 @@ _Goals:_ What are the goals of each player? (e.g., jumping to a tree, opening th
 The interactive device can be anything *except* a computer, a tablet computer or a smart phone, but the main way it interacts needs to be using light.
 
 \*\***Describe your setting, players, activity and goals here.**\*\*
+- Setting: In a platform of a subway station.
+- Players: The train and the people on the platform.
+- Activity: The light turns on when there's a train coming.
+- Goals: To let people on the platform know that the train in coming.
 
 Sketch a storyboard of the interactions you are planning. It does not need to be perfect, but must get across the behavior of the interactive device and the other characters in the scene. 
 
@@ -84,6 +88,7 @@ Present your idea to the other people in your breakout room. You can just get fe
 Try physically acting out the interaction you planned. For now, you can just pretend the device is doing the things you’ve scripted for it. 
 
 \*\***Are there things that seemed better on paper than acted out?**\*\*
+It's better when acting out by showing the actual light.
 
 \*\***Are there new ideas that occur to you or your collaborators that come up from the acting?**\*\*
 
