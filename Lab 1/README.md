@@ -77,6 +77,7 @@ The interactive device can be anything *except* a computer, a tablet computer or
 Sketch a storyboard of the interactions you are planning. It does not need to be perfect, but must get across the behavior of the interactive device and the other characters in the scene. 
 
 \*\***Include a picture of your storyboard here**\*\*
+![Storyboard](storyboard1.jpg)
 
 Present your idea to the other people in your breakout room. You can just get feedback from one another or you can work together on the other parts of the lab.
 
@@ -91,6 +92,7 @@ Try physically acting out the interaction you planned. For now, you can just pre
 It's better when acting out by showing the actual light.
 
 \*\***Are there new ideas that occur to you or your collaborators that come up from the acting?**\*\*
+We figured that the there can be different light indicating different state of the train. For example, red light is to indicate the subway is coming, and green light is to tell the passengers that it's safe to onboard.
 
 
 ## Part C. Prototype the device
@@ -104,6 +106,7 @@ We invented this tool for this lab!
 If you run into technical issues with this tool, you can also use a light switch, dimmer, etc. that you can can manually or remotely control.
 
 \*\***Give us feedback on Tinkerbelle.**\*\*
+I ran into technical issue using tinkerbelle on Windows Sublinux system (Ubuntu 20.04.2 LTS), I think it might be some issue using a virtual machine. And it doesn't work on powershell too, following the tutorial posted on canvas. I ended up using my friends computer to do so. I hope that it can be fixed in the future, thank you!
 
 
 ## Part D. Wizard the device
@@ -125,6 +128,7 @@ Think about the setting of the device: is the environment a place where the devi
 \*\***Include sketches of what your device might look like here.**\*\*
 
 \*\***What concerns or opportunitities are influencing the way you've designed the device to look?**\*\*
+This device may face a lot of issue since the environment in the railways is unpredictable, especially in NYC. Thus, in addition to using physical sensor in the tunnel and platform, the system should also integrate the API from the NYC subway system to notify the passenger precisely when the subway is coming. 
 
 
 ## Part F. Record
@@ -134,6 +138,7 @@ Think about the setting of the device: is the environment a place where the devi
 \*\***Please indicate anyone you collaborated with on this Lab.**\*\*
 Be generous in acknowledging their contributions! And also recognizing any other influences (e.g. from YouTube, Github, Twitter) that informed your design. 
 
+### Collaborator: Chi-Yu Lin (Evan Lin)
 
 
 # Staging Interaction, Part 2 
