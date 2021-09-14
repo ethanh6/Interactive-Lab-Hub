@@ -69,6 +69,7 @@ _Goals:_ What are the goals of each player? (e.g., jumping to a tree, opening th
 The interactive device can be anything *except* a computer, a tablet computer or a smart phone, but the main way it interacts needs to be using light.
 
 \*\***Describe your setting, players, activity and goals here.**\*\*
+
 - Setting: In a platform of a subway station.
 - Players: The train and the passengers on the platform.
 - Activity: The monitor in the station shows "warning" when a subway coming, and shows "safe" when it is safe to get onboard
@@ -83,6 +84,7 @@ Sketch a storyboard of the interactions you are planning. It does not need to be
 Present your idea to the other people in your breakout room. You can just get feedback from one another or you can work together on the other parts of the lab.
 
 \*\***Summarize feedback you got here.**\*\*
+
 1. The message board should be placed above the subway train, or the message can't be delivered when the train comes in.
 2. This can also include a warning sound system, in case that passengers don't notice the message. It also works better for visually impaired citizen.
 
@@ -92,9 +94,11 @@ Present your idea to the other people in your breakout room. You can just get fe
 Try physically acting out the interaction you planned. For now, you can just pretend the device is doing the things you’ve scripted for it. 
 
 \*\***Are there things that seemed better on paper than acted out?**\*\*
+
 It's better when acting out by showing the actual light.
 
 \*\***Are there new ideas that occur to you or your collaborators that come up from the acting?**\*\*
+
 We figured that the there can be different light indicating different state of the train. For example, red light is to indicate the subway is coming, and green light is to tell the passengers that it's safe to onboard.
 
 
@@ -109,6 +113,7 @@ We invented this tool for this lab!
 If you run into technical issues with this tool, you can also use a light switch, dimmer, etc. that you can can manually or remotely control.
 
 \*\***Give us feedback on Tinkerbelle.**\*\*
+
 I ran into technical issue using tinkerbelle on Windows Sublinux system (Ubuntu 20.04.2 LTS), I think it might be some issue using a virtual machine. And it doesn't work on powershell too, following the tutorial posted on canvas. I ended up using my friends computer to do so. I hope that it can be fixed in the future, thank you!
 
 
@@ -116,12 +121,14 @@ I ran into technical issue using tinkerbelle on Windows Sublinux system (Ubuntu 
 Take a little time to set up the wizarding set-up that allows for someone to remotely control the device while someone acts with it. Hint: You can use Zoom to record videos, and you can pin someone’s video feed if that is the scene which you want to record. 
 
 \*\***Include your first attempts at recording the set-up video here.**\*\*
+
 [Video first take](https://github.com/ethanh6/Interactive-Lab-Hub/blob/Fall2021/Lab%201/media/first_take.mp4)
 
 
 Now, hange the goal within the same setting, and update the interaction with the paper prototype. 
 
 \*\***Show the follow-up work here.**\*\*
+
 ![Updated prototype with green light](media/green.jpg)
 ![Updated prototype with red light](media/red.jpg)
 
@@ -133,18 +140,23 @@ Only now should you start worrying about what the device should look like. Devel
 Think about the setting of the device: is the environment a place where the device could overheat? Is water a danger? Does it need to have bright colors in an emergency setting?
 
 \*\***Include sketches of what your device might look like here.**\*\*
+
 ![Device](media/device.jpg)
 
 \*\***What concerns or opportunitities are influencing the way you've designed the device to look?**\*\*
+
 This device may face a lot of issue since the environment in the railways is unpredictable, especially in NYC. Thus, in addition to using physical sensor in the tunnel and platform, the system should also integrate the API from the NYC subway system to notify the passenger precisely when the subway is coming. 
+
 
 
 ## Part F. Record
 
 \*\***Take a video of your prototyped interaction.**\*\*
+
 [Video link](https://github.com/ethanh6/Interactive-Lab-Hub/blob/Fall2021/Lab%201/media/video.mp4)
 
 \*\***Please indicate anyone you collaborated with on this Lab.**\*\*
+
 Be generous in acknowledging their contributions! And also recognizing any other influences (e.g. from YouTube, Github, Twitter) that informed your design. 
 
 ### Collaborator: Chi-Yu Lin (Evan Lin)
@@ -160,6 +172,7 @@ This describes the second week's work for this lab activity.
 You will be assigned three partners from another group. Go to their github pages, view their videos, and provide them with reactions, suggestions & feedback: explain to them what you saw happening in their video. Guess the scene and the goals of the character. Ask them about anything that wasn’t clear. 
 
 \*\***Summarize feedback from your partners here.**\*\*
+
 My collaborator, Even Lin, reminded me that this monitor can present different states of the subway, for example, "warning" warns the passengers to mind the incoming subway, and the "safe" sign lets the passengers know that it is safe to get into the train.
 
 ## Make it your own
