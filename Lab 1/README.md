@@ -70,18 +70,21 @@ The interactive device can be anything *except* a computer, a tablet computer or
 
 \*\***Describe your setting, players, activity and goals here.**\*\*
 - Setting: In a platform of a subway station.
-- Players: The train and the people on the platform.
-- Activity: The light turns on when there's a train coming.
-- Goals: To let people on the platform know that the train in coming.
+- Players: The train and the passengers on the platform.
+- Activity: The monitor in the station shows "warning" when a subway coming, and shows "safe" when it is safe to get onboard
+- Goals: To let people on the platform know that the train in coming, and when is safe to go.
 
 Sketch a storyboard of the interactions you are planning. It does not need to be perfect, but must get across the behavior of the interactive device and the other characters in the scene. 
 
 \*\***Include a picture of your storyboard here**\*\*
-![Storyboard](storyboard1.jpg)
+
+![Storyboard](media/storyboard1.jpg)
 
 Present your idea to the other people in your breakout room. You can just get feedback from one another or you can work together on the other parts of the lab.
 
 \*\***Summarize feedback you got here.**\*\*
+1. The message board should be placed above the subway train, or the message can't be delivered when the train comes in.
+2. This can also include a warning sound system, in case that passengers don't notice the message. It also works better for visually impaired citizen.
 
 
 ## Part B. Act out the Interaction
@@ -157,7 +160,7 @@ This describes the second week's work for this lab activity.
 You will be assigned three partners from another group. Go to their github pages, view their videos, and provide them with reactions, suggestions & feedback: explain to them what you saw happening in their video. Guess the scene and the goals of the character. Ask them about anything that wasn’t clear. 
 
 \*\***Summarize feedback from your partners here.**\*\*
-My collaborator reminds me that this monitor can present different states of the subway, for example, "warning" warns the passengers to mind the incoming subway, and the "safe" sign lets the passengers know that it is safe to get into the train.
+My collaborator, Even Lin, reminded me that this monitor can present different states of the subway, for example, "warning" warns the passengers to mind the incoming subway, and the "safe" sign lets the passengers know that it is safe to get into the train.
 
 ## Make it your own
 
@@ -167,3 +170,5 @@ Do last week’s assignment again, but this time:
 3) We will be grading with an emphasis on creativity. 
 
 \*\***Document everything here. (Particularly, we would like to see the storyboard and video, although photos of the prototype are also great.)**\*\*
+
+I tried to embed a video link in this markdown file, but it seemed like it is impossible so I put the video, as well as the images in the "media" folder.
