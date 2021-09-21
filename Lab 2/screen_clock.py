@@ -4,6 +4,10 @@ import digitalio
 import board
 from PIL import Image, ImageDraw, ImageFont
 import adafruit_rgb_display.st7789 as st7789
+from time import strftime, sleep
+import webcolors, os
+from adafruit_rgb_display.rgb import color565
+from datetime import datetime, timezone
 
 # Configuration for CS and DC pins (these are FeatherWing defaults on M0/M4):
 cs_pin = digitalio.DigitalInOut(board.CE0)
@@ -29,6 +33,8 @@ disp = st7789.ST7789(
     y_offset=40,
 )
 
+
+
 # Create blank image for drawing.
 # Make sure to create image with mode 'RGB' for full color.
 height = disp.width  # we swap height/width to rotate it to landscape!
@@ -47,8 +53,9 @@ disp.image(image, rotation)
 padding = -2
 top = padding
 bottom = height - padding
+
 # Move left to right keeping track of the current x position for drawing shapes.
-x = 0
+# x = 0
 
 # Alternatively load a TTF font.  Make sure the .ttf font file is in the
 # same directory as the python script!
@@ -59,13 +66,61 @@ font = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 18)
 backlight = digitalio.DigitalInOut(board.D22)
 backlight.switch_to_output()
 backlight.value = True
+buttonA = digitalio.DigitalInOut(board.D23)
+buttonB = digitalio.DigitalInOut(board.D24)
+buttonA.switch_to_input()
+buttonB.switch_to_input()
 
+x = 0
+y = top
+
+print(font.getsize("Ethan"))
+
+# Main loop
 while True:
     # Draw a black filled box to clear the image.
     draw.rectangle((0, 0, width, height), outline=0, fill=0)
 
-    #TODO: Lab 2 part D work should be filled in here. You should be able to look in cli_clock.py and stats.py 
+    #TODO: Lab 2 part D work should be filled in here. You should be able to look in cli_clock.py and stats.py
+
+    # backlight.value = not (buttonA.value and buttonB.value)
+
+    name = "Ethan's Raspberry Pi"
+    cmd = "hostname -I | cut -d' ' -f1"
+    IP = "IP: " + subprocess.check_output(cmd,shell=True).decode("utf-8")
+    now = datetime.now().strftime("%H:%M:%S")
+
+    x_dist, y_dist = 0, 0
+    print("({}, {}) + ({}, {})".format(x,y,x_dist,y_dist), end='\r')
+    print()
+
+    # update position
+    if not buttonA.value and not buttonA.value:
+        x, y = 0, 0
+    if not buttonA.value:
+        y -= 1
+    if not buttonB.value:
+        y += 1
+
+    draw.text((x+x_dist, y+y_dist), name, font=font, fill="#FFFFFF")
+
+    # y_dist += font.getsize(name)[1]
+    y_dist = 21
+
+    draw.text((x+x_dist,y+y_dist), IP, font=font, fill="#FFFF00")
+
+    # y_dist += font.getsize(IP)[1]
+    y_dist = 41
+
+    draw.text((x+x_dist,y+y_dist), now, font=font, fill="#FFFF00")
+
 
     # Display image.
     disp.image(image, rotation)
-    time.sleep(1)
+    # time.sleep(0.1)
+
+
+
+
+
+
