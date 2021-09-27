@@ -191,10 +191,12 @@ After that, Git will ask you to login to your GitHub account to push the updates
 ## Make a short video of your modified barebones PiClock
 
 \*\*\***Take a video of your PiClock.**\*\*\*
+[video](https://drive.google.com/drive/folders/1cFbYoghhAQ4OEvbUoqvVqatasZdfxWIR?usp=sharing)
 
 ## Part G. 
 ## Sketch and brainstorm further interactions and features you would like for your clock for Part 2.
-
+[Sketch](https://drive.google.com/drive/folders/1cFbYoghhAQ4OEvbUoqvVqatasZdfxWIR?usp=sharing)
+Further interactions: the two buttons can be used to adjust position and font size. The current design can only move the position in y-axis direction, it can be further developed to move across the screen. 
 
 # Prep for Part 2
 
