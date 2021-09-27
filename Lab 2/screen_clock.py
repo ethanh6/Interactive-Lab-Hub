@@ -7,7 +7,8 @@ import adafruit_rgb_display.st7789 as st7789
 from time import strftime, sleep
 import webcolors, os
 from adafruit_rgb_display.rgb import color565
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta, date
+import pytz
 
 # Configuration for CS and DC pins (these are FeatherWing defaults on M0/M4):
 cs_pin = digitalio.DigitalInOut(board.CE0)
@@ -32,7 +33,6 @@ disp = st7789.ST7789(
     x_offset=53,
     y_offset=40,
 )
-
 
 
 # Create blank image for drawing.
@@ -71,10 +71,90 @@ buttonB = digitalio.DigitalInOut(board.D24)
 buttonA.switch_to_input()
 buttonB.switch_to_input()
 
-x = 0
-y = top
+class Clock:
+    def __init__(self):
+        self.state_num = 8
+        self.state_ptr = 5
+        self.descriptions = \
+            ["AM/PM",
+            "24 hour",
+            "24 hour in binary",
+            "Date",
+            "Different City",
+            "Days left until the end\nof the semester",
+            "Bitcoin price",
+            "Information"]
+    
+    def change_mode(self, A, B):
 
-print(font.getsize("Ethan"))
+        # display an image
+        if A and B:
+            print("AB")
+        
+        elif A:
+            self.state_ptr = (self.state_ptr - 1 + self.state_num) % self.state_num
+            print("A")
+        elif B:
+            self.state_ptr = (self.state_ptr + 1) % self.state_num
+            print("B")
+    
+    def get_state(self):
+        return self.state_ptr
+
+    def get_info(self):
+        time = datetime.now()
+        time_str = ""
+        if self.state_ptr == 0:
+            time_str = time.strftime("%I:%M %p")
+        elif self.state_ptr == 1:
+            time_str = time.strftime("%H:%M:%S")
+        elif self.state_ptr == 2:
+            time_tmp = time.strftime("%H:%M:%S")
+            hr, min, sec = [str(bin(int(i)))[2:] for i in time_tmp.split(":")]
+            time_str = "Hr:  {}\nMin: {}\nSec: {}".format(hr, min, sec)
+
+        elif self.state_ptr == 3:
+            time_str = time.strftime("%m/%d/%Y")
+            time_str += "\n"
+
+            wd = datetime.today().weekday()
+            time_str += ("Monday"    if wd == 0 else
+                         "Tuesday"   if wd == 1 else
+                         "Wednesday" if wd == 2 else
+                         "Thursday"  if wd == 3 else 
+                         "Friday"    if wd == 4 else
+                         "Saturday"  if wd == 5 else
+                         "Sunday"    if wd == 6 else "" )
+
+        elif self.state_ptr == 4:  # timezone
+            la_time  = datetime.now(pytz.timezone('US/Pacific')).strftime("%I:%M %p")
+            nyc_time = datetime.now(pytz.timezone('US/Eastern')).strftime("%I:%M %p")
+            chicago_time = datetime.now(pytz.timezone('America/Chicago')).strftime("%I:%M %p")
+            time_str = "New York: {}\nLos Angeles: {}\nChicago: {}".format(nyc_time, la_time, chicago_time)
+        
+        elif self.state_ptr == 5:
+            today = date.today()
+            future = date(2021,12,18)
+            diff = future - today
+            time_str = "\n" + str(diff.days)
+
+        elif self.state_ptr == 6:
+            time_str = "$ xxxx"
+
+        elif self.state_ptr == 7:
+            name = "Ethan's Raspberry Pi"
+            cmd = "hostname -I | cut -d' ' -f1"
+            IP = "IP: " + subprocess.check_output(cmd,shell=True).decode("utf-8")
+            time_str = "{}\nIP: {}".format(name, IP) 
+
+        return time_str
+    
+    def get_description(self):
+        n = str(self.state_ptr + 1)
+        info = n + ". " + self.descriptions[self.state_ptr]
+        return info
+
+clock = Clock()
 
 # Main loop
 while True:
@@ -83,41 +163,29 @@ while True:
 
     #TODO: Lab 2 part D work should be filled in here. You should be able to look in cli_clock.py and stats.py
 
-    # backlight.value = not (buttonA.value and buttonB.value)
 
-    name = "Ethan's Raspberry Pi"
-    cmd = "hostname -I | cut -d' ' -f1"
-    IP = "IP: " + subprocess.check_output(cmd,shell=True).decode("utf-8")
-    now = datetime.now().strftime("%H:%M:%S")
+    # fix position
+    x, y = 0, 0
 
-    x_dist, y_dist = 0, 0
-    print("({}, {}) + ({}, {})".format(x,y,x_dist,y_dist), end='\r')
-    print()
+    # update states
+    clock.change_mode(not buttonA.value, not buttonB.value)
 
-    # update position
-    if not buttonA.value and not buttonA.value:
-        x, y = 0, 0
-    if not buttonA.value:
-        y -= 1
-    if not buttonB.value:
-        y += 1
+    description = clock.get_description()
+    info = clock.get_info()
 
-    draw.text((x+x_dist, y+y_dist), name, font=font, fill="#FFFFFF")
+    draw.text((x, y), description, font=font, fill="#FFFF00")
+    y += font.getsize(description)[1]
 
-    # y_dist += font.getsize(name)[1]
-    y_dist = 21
+    pad = "  \n"
+    draw.text((x, y), pad, font=font, fill="#FFFF00")
+    y += font.getsize(pad)[1]
 
-    draw.text((x+x_dist,y+y_dist), IP, font=font, fill="#FFFF00")
-
-    # y_dist += font.getsize(IP)[1]
-    y_dist = 41
-
-    draw.text((x+x_dist,y+y_dist), now, font=font, fill="#FFFF00")
-
+    draw.text((x, y), info, font=font, fill="#FFFF00")
+    y += font.getsize(info)[1]
 
     # Display image.
     disp.image(image, rotation)
-    # time.sleep(0.1)
+    time.sleep(0.4)
 
 
 
