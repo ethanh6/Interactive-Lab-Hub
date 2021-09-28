@@ -9,6 +9,7 @@ import webcolors, os
 from adafruit_rgb_display.rgb import color565
 from datetime import datetime, timezone, timedelta, date
 import pytz
+import json
 
 # Configuration for CS and DC pins (these are FeatherWing defaults on M0/M4):
 cs_pin = digitalio.DigitalInOut(board.CE0)
@@ -74,7 +75,7 @@ buttonB.switch_to_input()
 class Clock:
     def __init__(self):
         self.state_num = 8
-        self.state_ptr = 5
+        self.state_ptr = 0
         self.descriptions = \
             ["AM/PM",
             "24 hour",
@@ -88,8 +89,11 @@ class Clock:
     def change_mode(self, A, B):
 
         # display an image
+        prev_ptr = self.state_ptr
         if A and B:
             print("AB")
+            self.state_ptr = 999
+        self.state_ptr = prev_ptr
         
         elif A:
             self.state_ptr = (self.state_ptr - 1 + self.state_num) % self.state_num
@@ -139,13 +143,19 @@ class Clock:
             time_str = "\n" + str(diff.days)
 
         elif self.state_ptr == 6:
-            time_str = "$ xxxx"
+            cmd = "curl https://api.coinbase.com/v2/prices/BTC-USD/buy -H 'Authorization: Bearer abd90df5f27a7b170cd775abf89d632b350b7c1c9d53e08b340cd9832ce52c2c' 2> /dev/null"
+            raw = subprocess.check_output(cmd,shell=True).decode("utf-8")
+            price = json.loads(raw)['data']['amount']
+            time_str = "$ " + str(price)
 
         elif self.state_ptr == 7:
             name = "Ethan's Raspberry Pi"
             cmd = "hostname -I | cut -d' ' -f1"
-            IP = "IP: " + subprocess.check_output(cmd,shell=True).decode("utf-8")
+            IP = subprocess.check_output(cmd,shell=True).decode("utf-8")
             time_str = "{}\nIP: {}".format(name, IP) 
+        
+        elif self.state_ptr = 999:
+            
 
         return time_str
     
