@@ -220,3 +220,8 @@ You are permitted (but not required) to work in groups and share a turn in; you 
 - I removed the functionality that can change the position of the text and images, since it is too complicated nad requires an implementation of a game loop, which I don't think is necessary in this project.
 - I added different clock functions, such as representing time in AM/PM and 24-hour format, and weekday, and current date. Another cool part is that it shows how many days left until the end of this semester. I think the coolest part is the real-time crypto price functionality - using Coinbase API, it displays the real-time Bitcoin, Ethereum and Dogecoin price, which I think is an essential part of every modern clock.
 
+## Make a short video of your modified barebones PiClock
+
+\*\*\***Take a video of your PiClock.**\*\*\*
+
+[video](https://www.youtube.com/watch?v=kGgpi0T24RQ)
