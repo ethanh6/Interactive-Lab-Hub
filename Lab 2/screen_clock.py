@@ -83,24 +83,28 @@ class Clock:
             "Date",
             "Different City",
             "Days left until the end\nof the semester",
-            "Bitcoin price",
-            "Information"]
+            "Crypto price",
+            "Information",
+            "Screen Protector"]
     
     def change_mode(self, A, B):
 
         # display an image
-        prev_ptr = self.state_ptr
-        if A and B:
-            print("AB")
-            self.state_ptr = 999
-        self.state_ptr = prev_ptr
+        # prev_ptr = self.state_ptr
+
         
-        elif A:
+        if A and (not B):
             self.state_ptr = (self.state_ptr - 1 + self.state_num) % self.state_num
-            print("A")
-        elif B:
+            # print("A")
+        elif B and (not A):
             self.state_ptr = (self.state_ptr + 1) % self.state_num
-            print("B")
+            # print("B")
+
+        # elif A and B:
+        #     self.state_ptr = 8
+        #     print("AB")
+        # else:
+        #     self.state_ptr = 0
     
     def get_state(self):
         return self.state_ptr
@@ -136,26 +140,39 @@ class Clock:
             chicago_time = datetime.now(pytz.timezone('America/Chicago')).strftime("%I:%M %p")
             time_str = "New York: {}\nLos Angeles: {}\nChicago: {}".format(nyc_time, la_time, chicago_time)
         
-        elif self.state_ptr == 5:
+        elif self.state_ptr == 5:  # days left
             today = date.today()
             future = date(2021,12,18)
             diff = future - today
             time_str = "\n" + str(diff.days)
 
-        elif self.state_ptr == 6:
-            cmd = "curl https://api.coinbase.com/v2/prices/BTC-USD/buy -H 'Authorization: Bearer abd90df5f27a7b170cd775abf89d632b350b7c1c9d53e08b340cd9832ce52c2c' 2> /dev/null"
-            raw = subprocess.check_output(cmd,shell=True).decode("utf-8")
-            price = json.loads(raw)['data']['amount']
-            time_str = "$ " + str(price)
+        elif self.state_ptr == 6:   # bitcoin
+            btc_cmd = "curl https://api.coinbase.com/v2/prices/BTC-USD/buy\
+             -H 'Authorization: Bearer abd90df5f27a7b170cd775abf89d632b350b7c1c9d53e08b340cd9832ce52c2c' 2> /dev/null"
+            btc_data = subprocess.check_output(btc_cmd,shell=True).decode("utf-8")
+            btc_price = json.loads(btc_data)['data']['amount']
 
-        elif self.state_ptr == 7:
+            eth_cmd = "curl https://api.coinbase.com/v2/prices/ETH-USD/buy\
+             -H 'Authorization: Bearer abd90df5f27a7b170cd775abf89d632b350b7c1c9d53e08b340cd9832ce52c2c' 2> /dev/null"
+            eth_data = subprocess.check_output(eth_cmd,shell=True).decode("utf-8")
+            eth_price = json.loads(eth_data)['data']['amount']
+
+            doge_cmd = "curl https://api.coinbase.com/v2/prices/DOGE-USD/buy\
+             -H 'Authorization: Bearer abd90df5f27a7b170cd775abf89d632b350b7c1c9d53e08b340cd9832ce52c2c' 2> /dev/null"
+            doge_cmd = subprocess.check_output(doge_cmd,shell=True).decode("utf-8")
+            doge_price = json.loads(doge_cmd)['data']['amount']
+
+            time_str = "Bitcoin: {}\nEthereum: {}\nDogecoin: {}".format(str(btc_price), str(eth_price), str(doge_price))
+
+        elif self.state_ptr == 7:   # info page
             name = "Ethan's Raspberry Pi"
             cmd = "hostname -I | cut -d' ' -f1"
             IP = subprocess.check_output(cmd,shell=True).decode("utf-8")
             time_str = "{}\nIP: {}".format(name, IP) 
         
-        elif self.state_ptr = 999:
-            
+        # show the screen protector
+        elif self.state_ptr == 8:
+            time_str = "image"
 
         return time_str
     
@@ -173,7 +190,6 @@ while True:
 
     #TODO: Lab 2 part D work should be filled in here. You should be able to look in cli_clock.py and stats.py
 
-
     # fix position
     x, y = 0, 0
 
@@ -182,16 +198,38 @@ while True:
 
     description = clock.get_description()
     info = clock.get_info()
+    ptr = clock.get_state()
+    print(ptr)
 
-    draw.text((x, y), description, font=font, fill="#FFFF00")
-    y += font.getsize(description)[1]
+    if ptr == 8:
+        image = Image.open("red.jpg")
 
-    pad = "  \n"
-    draw.text((x, y), pad, font=font, fill="#FFFF00")
-    y += font.getsize(pad)[1]
+        # Scale the image to the smaller screen dimension
+        image_ratio = image.width / image.height
+        screen_ratio = width / height
+        if screen_ratio < image_ratio:
+            scaled_width = image.width * height // image.height
+            scaled_height = height
+        else:
+            scaled_width = width
+            scaled_height = image.height * width // image.width
+        image = image.resize((scaled_width, scaled_height), Image.BICUBIC)
 
-    draw.text((x, y), info, font=font, fill="#FFFF00")
-    y += font.getsize(info)[1]
+        # Crop and center the image
+        x = scaled_width // 2 - width // 2
+        y = scaled_height // 2 - height // 2
+        image = image.crop((x, y, x + width, y + height))
+
+    else:
+        draw.text((x, y), description, font=font, fill="#FFFF00")
+        y += font.getsize(description)[1]
+
+        pad = "  \n"
+        draw.text((x, y), pad, font=font, fill="#FFFF00")
+        y += font.getsize(pad)[1]
+
+        draw.text((x, y), info, font=font, fill="#FFFF00")
+        y += font.getsize(info)[1]
 
     # Display image.
     disp.image(image, rotation)

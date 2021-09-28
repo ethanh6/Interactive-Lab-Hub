@@ -191,12 +191,13 @@ After that, Git will ask you to login to your GitHub account to push the updates
 ## Make a short video of your modified barebones PiClock
 
 \*\*\***Take a video of your PiClock.**\*\*\*
-[video](https://drive.google.com/drive/folders/1cFbYoghhAQ4OEvbUoqvVqatasZdfxWIR?usp=sharing)
+
+[video](https://www.youtube.com/watch?v=kGgpi0T24RQ)
 
 ## Part G. 
 ## Sketch and brainstorm further interactions and features you would like for your clock for Part 2.
 [Sketch](https://drive.google.com/drive/folders/1cFbYoghhAQ4OEvbUoqvVqatasZdfxWIR?usp=sharing)
-Further interactions: the two buttons can be used to adjust position and font size. The current design can only move the position in y-axis direction, it can be further developed to move across the screen. 
+Interactions: the two buttons can be used to adjust position and font size. The current design can only move the position in y-axis direction, it can be further developed to move across the screen. 
 
 # Prep for Part 2
 
@@ -214,4 +215,8 @@ As always, make sure you document contributions and ideas from others explicitly
 
 You are permitted (but not required) to work in groups and share a turn in; you are expected to make equal contribution on any group work you do, and N people's group project should look like N times the work of a single person's lab. What each person did should be explicitly documented. Make sure the page for the group turn in is linked to your Interactive Lab Hub page. 
 
+## Enhancement in part 2
+
+- I removed the functionality that can change the position of the text and images, since it is too complicated nad requires an implementation of a game loop, which I don't think is necessary in this project.
+- I added different clock functions, such as representing time in AM/PM and 24-hour format, and weekday, and current date. Another cool part is that it shows how many days left until the end of this semester. I think the coolest part is the real-time crypto price functionality - using Coinbase API, it displays the real-time Bitcoin, Ethereum and Dogecoin price, which I think is an essential part of every modern clock.
 
