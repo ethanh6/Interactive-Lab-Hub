@@ -102,10 +102,12 @@ From a remote browser on the same network, check to make sure your webserver is 
 Storyboard and/or use a Verplank diagram to design a speech-enabled device. (Stuck? Make a device that talks for dogs. If that is too stupid, find an application that is better than that.) 
 
 \*\***Post your storyboard and diagram here.**\*\*
+![Storyboard](storyboard_lab3i.png)
 
 Write out what you imagine the dialogue to be. Use cards, post-its, or whatever method helps you develop alternatives or group responses. 
 
 \*\***Please describe and document your process.**\*\*
+- This machine can detect the emotions and responds with appropriate actions. Also, this machine can answer pre-defined problems like weather, date and temperature.
 
 ### Acting out the dialogue
 
@@ -113,10 +115,16 @@ Find a partner, and *without sharing the script with your partner* try out the d
 
 \*\***Describe if the dialogue seemed different than what you imagined when it was acted out, and how.**\*\*
 
+
+
 ### Wizarding with the Pi (optional)
 In the [demo directory](./demo), you will find an example Wizard of Oz project. In that project, you can see how audio and sensor data is streamed from the Pi to a wizard controller that runs in the browser.  You may use this demo code as a template. By running the `app.py` script, you can see how audio and sensor data (Adafruit MPU-6050 6-DoF Accel and Gyro Sensor) is streamed from the Pi to a wizard controller that runs in the browser `http://<YouPiIPAddress>:5000`. You can control what the system says from the controller as well!
 
 \*\***Describe if the dialogue seemed different than what you imagined, or when acted out, when it was wizarded, and how.**\*\*
+
+- [Video Link](https://www.youtube.com/watch?v=8w-2Gz6Xp3k)
+- The dialogue is different when making a phone call. We realized that the machine doesn't need to make further action before the user ending the call; otherwise it would be so strange.
+- Video Credit & Participation: Ethan Chang
 
 # Lab 3 Part 2
 
