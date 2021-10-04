@@ -116,6 +116,9 @@ Find a partner, and *without sharing the script with your partner* try out the d
 
 \*\***Describe if the dialogue seemed different than what you imagined when it was acted out, and how.**\*\*
 
+- [Video Link](https://www.youtube.com/watch?v=8w-2Gz6Xp3k)
+- The dialogue is different when making a phone call. We realized that the machine doesn't need to make further action before the user ending the call; otherwise it would be so strange.
+- Video Credit & Participation: Ethan Chang
 
 
 ### Wizarding with the Pi (optional)
@@ -123,9 +126,6 @@ In the [demo directory](./demo), you will find an example Wizard of Oz project. 
 
 \*\***Describe if the dialogue seemed different than what you imagined, or when acted out, when it was wizarded, and how.**\*\*
 
-- [Video Link](https://www.youtube.com/watch?v=8w-2Gz6Xp3k)
-- The dialogue is different when making a phone call. We realized that the machine doesn't need to make further action before the user ending the call; otherwise it would be so strange.
-- Video Credit & Participation: Ethan Chang
 
 # Lab 3 Part 2
 
