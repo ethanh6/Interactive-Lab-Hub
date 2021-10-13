@@ -146,8 +146,11 @@ The system should:
 
 *Document how the system works*
 1. This machine will pre-fetch stock price data and cryptocurrencies data of the day using yahoo finance and coingecko api.
-2. Then it will ask the user which target they are looking for (for example, user says google), then it will let the user knwo that it is fetching the data.
-3. When the fetching process is done, the system will notify the user to wave at the sensor to purchase a share. When the user does so, the system will say you have bought one unit of the target (in this case, one share of google).
+2. The system initiates by letting the user know that it is active.
+2. It will ask the user which target they are looking for (for example, user says google)
+3. It will let the user know that it is fetching the data.
+4. When the fetching process is done, the system will notify the user to wave at the sensor to purchase a share.
+5. When the user waves, the system will confirm that you have bought one unit of the target (in this case, one share of google).
 
 *Include videos or screencaptures of both the system and the controller.*
 ### The picture of the system
