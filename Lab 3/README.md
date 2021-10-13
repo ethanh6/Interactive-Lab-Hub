@@ -146,17 +146,20 @@ The system should:
 
 *Document how the system works*
 1. This machine will pre-fetch stock price data and cryptocurrencies data of the day using yahoo finance and coingecko api.
-2. The it asks users which target they are looking for (for example, user says google), then it will let the user knwo that the data is being fetched.
-3. When the fetching process is done, the system will notify the user to wave at the sensor to purchase a share. When the user does so, the system will say that the target has been bought alone with the price. 
+2. Then it will ask the user which target they are looking for (for example, user says google), then it will let the user knwo that it is fetching the data.
+3. When the fetching process is done, the system will notify the user to wave at the sensor to purchase a share. When the user does so, the system will say you have bought one unit of the target (in this case, one share of google).
 
 *Include videos or screencaptures of both the system and the controller.*
-### The machine interacts with user by speaking, as in the following videos:
+### The picture of the system
+![Picture of the system](system_pic.jpg)
 
-[Picture of the system]()
+### The machine interacts with user by speaking, as in the following videos:
 
 [Video 1](https://www.youtube.com/watch?v=Z8tSP4K21Cs)
 
 [Video 2](https://www.youtube.com/watch?v=YUNuovFE1w8)
+
+### We don't integrate the system with a web server, so there is no screencaptures of it.
 
 ## Test the system
 Try to get at least two people to interact with your system. (Ideally, you would inform them that there is a wizard _after_ the interaction, but we recognize that can be hard.)
@@ -166,7 +169,7 @@ Answer the following:
 ### What worked well about the system and what didn't?
 \*\**your answer here*\*\*
 
-- What worked: Under the hood, the prices have been pre-fetched for better (faster) user experience.
+- What worked: Under the hood, the prices have been pre-fetched for better (faster) user experience. In a real stock-buying product, the data needs to be fetch in real time.
 
 - What didn't work: The speech2text module outcome is inconsistent when a user speaks in different voice or volumn, so we decided to design it as if it is detecting the user, but the options are hard-coded. 
 
@@ -174,23 +177,26 @@ Answer the following:
 
 \*\**your answer here*\*\*
 
-- What worked: The speaker worked as expected and the proximity sensor worked well as well.
+- What worked: The speaker worked as expected and the proximity sensor worked well too.
 
-- What didn't work: microphone didn't work, which is the part that is related to speech2text. I think the issue is that the precision of the speech2text with microphone depends on how the user speaks. If the user speaks loud and clear, the microphone could work; however, on the other hand, if the user speaks remotely and not really audiable, the probability would be high that the speech recognition doesn't work.
+- What didn't work: the microphone didn't work, which is the part that is related to the speech2text module. I think the issue is that the precision of the speech2text using the microphone depends on how the user speaks. If the user speaks loud and clear, the microphone could work; on the other hand, if the user speaks remotely and not really audiable, the probability would be high that the speech recognition doesn't work as expected.
 
 ### What lessons can you take away from the WoZ interactions for designing a more autonomous version of the system?
 
 \*\**your answer here*\*\*
-- 
+- Although the proximity sensor worked as expected, it is not as sensitive as expected on the first try; thus, we adjusted the sensitivity to enable it to recognize a wave from a normal person.
+- For a more autonomous auto-trading system, it has to be fast enough for it to interact with a human while getting the data it needs. To address this issue, we pre-fetch all possible data in this small project, so that the interact time of the system is guarantee to be short. However, for a real-world product, the API and voice recognition system should be optimized to achieve ideal user experience.
 
 
 ### How could you use your system to create a dataset of interaction? What other sensing modalities would make sense to capture?
 
 \*\**your answer here*\*\*
-
+- I can make a database of the user purchase history, using this system. This database would contain what the users buy, how they buy it (possibly using different ways of interaction, such as voic or wave), and the current profit of the profile, like a normal stock management dashboard.
+- Another sensing modality is the the button with the light. Since there are two buttons, with green and red light respectively, the machine can indicate whether the target price is going up (green) or down (red). Also, there are actions related to the buttons: green for buy, and red for sell. 
+- The ideal way of interaction of this model is only using voice, since it is the most natural and convenient way for people to interact. It could be done as long as we figured how to recognize nature human speaking precisely and quickly.
 
 ### Team:
 - Ethan Chang (ec687)
 
 ### Othe notes:
-- I think I have a better idea this time, so I discard all the design I had in part 1 and re-design a new interactive system in part 2.
+- I think I have a better idea this time, so I discarded all the design I had in part 1 and re-designed a new interactive system in part 2.
