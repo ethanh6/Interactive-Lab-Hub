@@ -169,7 +169,7 @@ Answer the following:
 ### What worked well about the system and what didn't?
 \*\**your answer here*\*\*
 
-- What worked: Under the hood, the prices have been pre-fetched for better (faster) user experience. In a real stock-buying product, the data needs to be fetch in real time.
+- What worked: Under the hood, the prices have been pre-fetched for better (faster) user experience. In a real stock-buying product, the data needs to be fetch in real time. Also the text to speech works really well; it is very nature and easy to comprehend.
 
 - What didn't work: The speech2text module outcome is inconsistent when a user speaks in different voice or volumn, so we decided to design it as if it is detecting the user, but the options are hard-coded. 
 
@@ -185,6 +185,7 @@ Answer the following:
 
 \*\**your answer here*\*\*
 - Although the proximity sensor worked as expected, it is not as sensitive as expected on the first try; thus, we adjusted the sensitivity to enable it to recognize a wave from a normal person.
+- It is necessary to initiate the conversation first by the machine, or the user would not know when to start. It is also necessary to prompt the user for an input. It should be clear for a user to know when to speak and when to stop.
 - For a more autonomous auto-trading system, it has to be fast enough for it to interact with a human while getting the data it needs. To address this issue, we pre-fetch all possible data in this small project, so that the interact time of the system is guarantee to be short. However, for a real-world product, the API and voice recognition system should be optimized to achieve ideal user experience.
 
 
@@ -196,7 +197,7 @@ Answer the following:
 - The ideal way of interaction of this model is only using voice, since it is the most natural and convenient way for people to interact. It could be done as long as we figured how to recognize nature human speaking precisely and quickly.
 
 ### Team:
-- Ethan Chang (ec687)
+- Ethan Huang (eh543), Ethan Chang (ec687)
 
 ### Othe notes:
 - I think I have a better idea this time, so I discarded all the design I had in part 1 and re-designed a new interactive system in part 2.
