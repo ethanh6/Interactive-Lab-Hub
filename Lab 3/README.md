@@ -145,8 +145,18 @@ The system should:
 * require participants to speak to it. 
 
 *Document how the system works*
+1. This machine will pre-fetch stock price data and cryptocurrencies data of the day using yahoo finance and coingecko api.
+2. The it asks users which target they are looking for (for example, user says google), then it will let the user knwo that the data is being fetched.
+3. When the fetching process is done, the system will notify the user to wave at the sensor to purchase a share. When the user does so, the system will say that the target has been bought alone with the price. 
 
 *Include videos or screencaptures of both the system and the controller.*
+### The machine interacts with user by speaking, as in the following videos:
+
+[Picture of the system]()
+
+[Video 1](https://www.youtube.com/watch?v=Z8tSP4K21Cs)
+
+[Video 2](https://www.youtube.com/watch?v=YUNuovFE1w8)
 
 ## Test the system
 Try to get at least two people to interact with your system. (Ideally, you would inform them that there is a wizard _after_ the interaction, but we recognize that can be hard.)
@@ -155,10 +165,13 @@ Answer the following:
 
 ### What worked well about the system and what didn't?
 \*\**your answer here*\*\*
+- What worked: Under the hood, the prices have been pre-fetched for better (faster) user experience. For 
+- What didn't 
 
 ### What worked well about the controller and what didn't?
 
 \*\**your answer here*\*\*
+1. The speech2text outcome is inconsistent when a user speaks in different voice or volumn, so we decided to design it as if it is detecting the user, but the options are hard-coded. 
 
 ### What lessons can you take away from the WoZ interactions for designing a more autonomous version of the system?
 

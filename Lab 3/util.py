@@ -4,13 +4,14 @@ import pandas as pd
 import math
 from pycoingecko import CoinGeckoAPI
 
-TICKERS = 'PYPL MSFT AMZN AAPL TSLA'
+TICKERS = 'PYPL MSFT AMZN AAPL TSLA GOOG'
 
 stock_name = {"tesla": "TSLA",
               "microsoft": "MSFT",
               "paypal": "PYPL",
               "apple": "AAPL",
-              "amazon": "AMZN"}
+              "amazon": "AMZN",
+              "google": "GOOG"}
 
 # stock price api
 def fetch_data(timeframe="1mo", tickers=TICKERS):
