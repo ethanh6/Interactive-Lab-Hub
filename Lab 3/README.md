@@ -165,20 +165,32 @@ Answer the following:
 
 ### What worked well about the system and what didn't?
 \*\**your answer here*\*\*
-- What worked: Under the hood, the prices have been pre-fetched for better (faster) user experience. For 
-- What didn't 
+
+- What worked: Under the hood, the prices have been pre-fetched for better (faster) user experience.
+
+- What didn't work: The speech2text module outcome is inconsistent when a user speaks in different voice or volumn, so we decided to design it as if it is detecting the user, but the options are hard-coded. 
 
 ### What worked well about the controller and what didn't?
 
 \*\**your answer here*\*\*
-1. The speech2text outcome is inconsistent when a user speaks in different voice or volumn, so we decided to design it as if it is detecting the user, but the options are hard-coded. 
+
+- What worked: The speaker worked as expected and the proximity sensor worked well as well.
+
+- What didn't work: microphone didn't work, which is the part that is related to speech2text. I think the issue is that the precision of the speech2text with microphone depends on how the user speaks. If the user speaks loud and clear, the microphone could work; however, on the other hand, if the user speaks remotely and not really audiable, the probability would be high that the speech recognition doesn't work.
 
 ### What lessons can you take away from the WoZ interactions for designing a more autonomous version of the system?
 
 \*\**your answer here*\*\*
+- 
 
 
 ### How could you use your system to create a dataset of interaction? What other sensing modalities would make sense to capture?
 
 \*\**your answer here*\*\*
 
+
+### Team:
+- Ethan Chang (ec687)
+
+### Othe notes:
+- I think I have a better idea this time, so I discard all the design I had in part 1 and re-design a new interactive system in part 2.
