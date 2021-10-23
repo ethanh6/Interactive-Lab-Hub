@@ -280,4 +280,4 @@ Document all the prototypes and iterations you have designed and worked on! Agai
 	- This user can check the accumulative time they have studied today. 
 	- Every 30 minutes, the pi alerts the user to take a break; and user can turn it off.
 
-[Link to video interaction](https://youtu.be/goOlMELoEf4)
+[Link to video interaction](https://youtu.be/bAkdaHwne-0)
