@@ -271,6 +271,13 @@ We encourage you to try using these controls, **while** paying particular attent
 
 Document all the prototypes and iterations you have designed and worked on! Again, deliverables for this lab are writings, sketches, photos, and videos that show what your prototype:
 * "Looks like": shows how the device should look, feel, sit, weigh, etc.
+ - It is a simple display that can be put on your desk when you study. The screen will show you basic information such as current time, and how long you have studied, etc. Also there is a pressure sensor that is put under your seat, measuring how long you have been sitting. The pressure sensor is connected to the pi with a cord. 
+ - 
 * "Works like": shows what the device can do
+ - When you study, it displays current time, how long have you study today (accumulative), and alerts you to take a break every 30 minutes, just like an alarm. You can turn it off using a button attached to it. 
+  
 * "Acts like": shows how a person would interact with the device
+ - A user starts studying, and set up the pi to record the study time.
+ - This user can check the accumulative time they have studied today. 
+ - Every 30 minutes, the pi alerts the user to take a break; and user can turn it off.
 
