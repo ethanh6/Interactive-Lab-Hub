@@ -212,6 +212,8 @@ This can be as simple as the boat detector earlier.
 Try out different interaction outputs and inputs.
 
 **\*\*\*Describe and detail the interaction, as well as your experimentation here.\*\*\***
+- This is a self-encourging mirror. Studies have shown that morivating gesture such as high-five or thumb-up would be interpreted by human brain as a sign of recognizing and friendlyness, so this machine intends to motivate you to make the gesture, alone with the motivating quotes, to motivate the user's day. 
+- When you show your gesture, such as "high five" and "thumb up", the display will show corresponding texts, as long as with some random motivating quotes.  
 
 ### Part C
 ### Test the interaction prototype
@@ -219,15 +221,23 @@ Try out different interaction outputs and inputs.
 Now flight test your interactive prototype and **note down your observations**:
 For example:
 1. When does it what it is supposed to do?
+    - It should be activated when the user shows their hand to the camera, and the mirror (the raspberry pi with camera) will detect the gesture and display texts accordingly.
 1. When does it fail?
-1. When it fails, why does it fail?
-1. Based on the behavior you have seen, what other scenarios could cause problems?
+    - It would fail if the user makes a gesture that is ambiguous between the known gestures such as high-five, thumb-up and quite-coyote.
+2. When it fails, why does it fail?
+    - Since there are ambibuity between gesture. 
+3. Based on the behavior you have seen, what other scenarios could cause problems?
+    - Since the condition of gesture is determined by the distance between tips of fingers, it is necessary for the user to place their hand close enough to the camera, or the detection functionality would fail.
 
 **\*\*\*Think about someone using the system. Describe how you think this will work.\*\*\***
 1. Are they aware of the uncertainties in the system?
-1. How bad would they be impacted by a miss classification?
-1. How could change your interactive system to address this?
-1. Are there optimizations you can try to do on your sense-making algorithm.
+    - The uncertainty is that the user needs to place their gesture near the camera enough, so that their hand can be detected by openCV.
+2. How bad would they be impacted by a miss classification?
+    - It would not be terrible when the machine misclassifying the gesture. The only potential danger is the emotion of the user might be affected by the motivating quote.
+3. How could change your interactive system to address this?
+   - If there are uncertanties, the system will prompt the user to make the gesture more explicit, or ask the user to move close to the camera. 
+4. Are there optimizations you can try to do on your sense-making algorithm.
+    - Yes. The detection algorithm can be optimized by machine learning. Instead of using distance of finger tips, a machine learning algorithm is able to detect the gesture in different angle with much higher accuracy, since it is not rely on the position of the pixels. 
 
 ### Part D
 ### Characterize your own Observant system
