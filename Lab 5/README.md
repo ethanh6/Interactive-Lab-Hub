@@ -101,9 +101,13 @@ pi@ixe00:~/openCV-examples/object-detection $ python detect.py
 **\*\*\*Try each of the following four examples in the `openCV-examples`, include screenshots of your use and write about one design for each example that might work based on the individual benefits to each algorithm.\*\*\***
 
 1. Contour screen shot ![contour screen shot](./screen_shots/contour.png)
+    - This can be used as live-painting filter. The Contour indicates the major boundaries of the image, which can be detected as boundaries of block of colors. Users can select and change the color of the color blockchain as their will.
 2. face detection screen shot ![fact detection screen shot](./screen_shots/face_detection.png)
+    - By relative size and position of the entire head and eyes, this can be exploieted as detector of the direction of the user is facing. When it gets the direction of the user facing at, it can be used as a input of many games. 
 3. Object detection screen shot ![object detection screen shot](./screen_shots/object_detection.png)
+    - It can detect how many users are there in front of the camera. For example, it can be used to detect how crowded the class is.
 4. Optical flow screen shot ![optical flow screen shot](./screen_shots/optical_flow.png)
+    - It can keep track of the motion of the users' eyes, to detect if the user is paying attention to the screen or are being distracted. 
 
 #### MediaPipe
 
@@ -141,6 +145,8 @@ Try the two main features of this script: 1) pinching for percentage control, an
 
 **\*\*\*Consider how you might use this position based approach to create an interaction, and write how you might use it on either face, hand or body pose tracking.\*\*\***
 - Screen shot of experimenting hand_post.py ![Screen shot of experimenting hand_post.py](screen_shots/hand_post.png)
+- It can detect different hand gesture, such as "I Love You", "Hive Five" or "Rock N Roll". This can be done by calculating the distance of tips of each finger, then setup conditions based on the coordinates of the fingers. 
+- The percentage control can be used as the control of the font size displayed onto the screen. 
 
 (You might also consider how this notion of percentage control with hand tracking might be used in some of the physical UI you may have experimented with in the last lab, for instance in controlling a servo or rotary encoder.)
 
