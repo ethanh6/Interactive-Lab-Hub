@@ -57,7 +57,7 @@ class Quote_generator:
         '''
         self.QUOTES = ["Continuous improvement is \n better than delayed perfection.",
             "Hope, but never expect.\n Look forward, but never wait.",
-            "Work hard and don't allow anyone \n to make you feel bad for your success.",
+            "Work hard and don't allow anyone to \n make you feel bad for your success.",
             "Prove them wrong!\n",
             "Do all things with kindness!\n",
             "If you can't stop thinking about it,\n don't stop working for it.",
@@ -94,6 +94,7 @@ while True:
     success, img = cap.read()
     img = detector.findHands(img)
     lmList = detector.findPosition(img, draw=False)
+
     if len(lmList) != 0:
  
         thumbX, thumbY = lmList[4][1], lmList[4][2] #thumb
@@ -143,18 +144,28 @@ while True:
         q0, q1 = quote.split("\n")
         FONT_SIZE = 1.5
 
+        if state == 0:
+            m.setvolume(0)
+            volPer = 0
+            volBar = 400
+            counter = 0
+            print("Hello")
+            cv2.putText(img, 'Hello!', (100, 100), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
+        
         if coyote_condition:
             m.setvolume(0)
             volPer = 0
             volBar = 400
-            print("quite coyotea")
+            counter = 0
+            # print("quite coyotea")
             cv2.putText(img, 'quiet coyote!', (100, 100), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
 
         elif thumb_up_condition:
             m.setvolume(0)
             volPer = 0
             volBar = 400
-            print("thumb up")
+            counter = 0
+            # print("thumb up")
             cv2.putText(img, 'Thumb up!', (x, y), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
             cv2.putText(img, q0, (x, y+dy), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
             cv2.putText(img, q1, (x, y+2*dy), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
@@ -163,16 +174,18 @@ while True:
             m.setvolume(0)
             volPer = 0
             volBar = 400
-            print("I love you")
+            counter = 0
+            # print("I love you")
             cv2.putText(img, 'I love you too!', (x, y), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
-            cv2.putText(img, q0, (x, y+dy), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
-            cv2.putText(img, q1, (x, y+2*dy), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
+            cv2.putText(img, q0, (x-10, y+dy), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
+            cv2.putText(img, q1, (x-10, y+2*dy), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
 
         elif high_five_condition:
             m.setvolume(0)
             volPer = 0
             volBar = 400
-            print("High Five!")
+            counter = 0
+            # print("High Five!")
             cv2.putText(img, 'High five!', (x, y), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
             cv2.putText(img, q0, (x, y+dy), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
             cv2.putText(img, q1, (x, y+2*dy), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
