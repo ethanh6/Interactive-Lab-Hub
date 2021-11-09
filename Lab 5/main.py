@@ -5,6 +5,7 @@ import HandTrackingModule as htm
 import math
 from ctypes import cast, POINTER
 import alsaaudio
+import random
 m = alsaaudio.Mixer()
 ################################
 wCam, hCam = 640, 480
@@ -43,6 +44,58 @@ def is_high_five(thumbX, thumbY, pointerX, pointerY, middleX, middleY, ringX, ri
     a2 = math.hypot(middleX-ringX, middleY-ringY)
     a3 = math.hypot(ringX-pinkyX, ringY-pinkyY)
     return a0>70 and a1>70 and a2>70 and a3>70
+
+class Quote_generator:
+    
+    def __init__(self, state):
+        '''
+        state = 0: nothing
+        state = 1: thumbup
+        state = 2: high5
+        state = 3: i love you
+        state = 4: quite coyote
+        '''
+        self.QUOTES = ["Continuous improvement is \n better than delayed perfection.",
+            "Hope, but never expect.\n Look forward, but never wait.",
+            "Work hard and don't allow anyone \n to make you feel bad for your success.",
+            "Prove them wrong!\n",
+            "Do all things with kindness!\n",
+            "If you can't stop thinking about it,\n don't stop working for it.",
+            "Never try to fit in.\n You were born to stand out!"]
+        self.state = state 
+        self.quote = self.QUOTES[random.randint(0, len(self.QUOTES)-1)]
+        self.counter = 0
+
+    def get_state(self):
+        return self.state
+
+    def get_quote(self):
+        return self.quote
+
+    def get_counter(self):
+        return self.counter
+    
+    def update_gesture(self, thumbup, high5, iloveu, coyote):
+        if thumbup and self.state != 1:
+            self.state = 1
+            self.quote = self.QUOTES[random.randint(0, len(self.QUOTES)-1)]
+
+        elif high5 and self.state != 2:
+            self.state = 2
+            self.quote = self.QUOTES[random.randint(0, len(self.QUOTES)-1)]
+
+        elif iloveu and self.state != 3:
+            self.state = 3
+            self.quote = self.QUOTES[random.randint(0, len(self.QUOTES)-1)]
+
+        elif coyote and self.state != 4:
+            self.state = 4
+            self.quote = self.QUOTES[random.randint(0, len(self.QUOTES)-1)]
+        else:
+            self.state = 0
+            self.counter = (self.counter + 1) % 100
+
+quote_generator = Quote_generator(state=0)
 
 while True:
     success, img = cap.read()
@@ -95,34 +148,53 @@ while True:
                                         middleX, middleY,
                                         ringX, ringY,
                                         pinkyX, pinkyY)
+        
+        # state machine
+        quote_generator.update_gesture(thumb_up_condition, high_five_condition, i_love_you_condition, coyote_condition)
+        quote = quote_generator.get_quote()
+        state = quote_generator.get_state()
+        counter = quote_generator.get_counter()
 
+        print(state, counter)
+
+        dy = 20
+        x, y = 150, 150
+        q0, q1 = quote.split("\n")
+
+        FONT_SIZE = 1.5
         if coyote_condition:
             m.setvolume(0)
             volPer = 0
             volBar = 400
             print("quite coyotea")
-            cv2.putText(img, 'quiet coyote!', (100, 100), cv2.FONT_HERSHEY_PLAIN, 2, (255, 0, 0), 3)
+            cv2.putText(img, 'quiet coyote!', (100, 100), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
 
         elif thumb_up_condition:
             m.setvolume(0)
             volPer = 0
             volBar = 400
             print("thumb up")
-            cv2.putText(img, 'thumb up', (102, 100), cv2.FONT_HERSHEY_PLAIN, 2, (255, 0, 0), 3)
+            cv2.putText(img, 'Thumb up!', (x, y), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
+            cv2.putText(img, q0, (x, y+dy), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
+            cv2.putText(img, q1, (x, y+2*dy), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
 
         elif i_love_you_condition:
             m.setvolume(0)
             volPer = 0
             volBar = 400
             print("I love you")
-            cv2.putText(img, 'I love you too!', (100, 100), cv2.FONT_HERSHEY_PLAIN, 2, (255, 0, 0), 3)
+            cv2.putText(img, 'I love you too!', (x, y), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
+            cv2.putText(img, q0, (x, y+dy), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
+            cv2.putText(img, q1, (x, y+2*dy), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
 
         elif high_five_condition:
             m.setvolume(0)
             volPer = 0
             volBar = 400
             print("High Five!")
-            cv2.putText(img, 'High five!', (100, 100), cv2.FONT_HERSHEY_PLAIN, 2, (255, 0, 0), 3)
+            cv2.putText(img, 'High five!', (x, y), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
+            cv2.putText(img, q0, (x, y+dy), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
+            cv2.putText(img, q1, (x, y+2*dy), cv2.FONT_HERSHEY_PLAIN, FONT_SIZE, (255, 0, 0), 3)
 
         else:
             vol = np.interp(length0, [50, 300], [minVol, maxVol])
@@ -130,9 +202,7 @@ while True:
             volPer = np.interp(length0, [50, 300], [0, 100])
             m.setvolume(int(vol))
 
-        # print(int(length), vol)
 
- 
         if length0 < 50:
             cv2.circle(img, (cx, cy), 15, (0, 255, 0), cv2.FILLED)
  
