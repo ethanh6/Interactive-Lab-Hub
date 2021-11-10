@@ -212,7 +212,7 @@ This can be as simple as the boat detector earlier.
 Try out different interaction outputs and inputs.
 
 **\*\*\*Describe and detail the interaction, as well as your experimentation here.\*\*\***
-- This is a self-encourging mirror. Studies have shown that morivating gesture such as high-five or thumb-up would be interpreted by human brain as a sign of recognizing and friendlyness, so this machine intends to motivate you to make the gesture, alone with the motivating quotes, to motivate the user's day. 
+- This is a mirror that is designed to encourage you and make your day better. Studies have shown that morivating gesture such as high-five or thumb-up would be interpreted by human brain as a sign of recognizing and friendlyness, so this machine intends to motivate you to make the gesture, alone with the motivating quotes, to motivate the user's day. 
 - When you show your gesture, such as "high five" and "thumb up", the display will show corresponding texts, as long as with some random motivating quotes.  
 
 ### Part C
@@ -254,6 +254,24 @@ During the lecture, we mentioned questions to help characterize a material:
 
 **\*\*\*Include a short video demonstrating the answers to these questions.\*\*\***
 
+* What can you use X for?
+  - For self motivating purposes; to cheer yourself up.
+* What is a good environment for X?
+  - A room with sufficitn light, and some room for you to stand in front of the mirror. 
+* What is a bad environment for X?
+  - As the video demonstrated, if the camera does not receive enough lightening, the openCV hand detection function will not work as good as expected. 
+* When will X break?
+  - When the user places their hands too close the the camera, for instance when part of their hands are outside of the scope of the camera, then the openCV library might fail to detect the shape of the hands, which would frustrate the users. 
+* When it breaks how will X break?
+  - When it breaks, the camera and mirror (the display) can still work properly. The system doesn't shutdown due to certain user behavior. It is only activated when it detects a recognizable gesture.
+* What are other properties/behaviors of X?
+  - When the user shows their hand but not make a recognizable gesture, the system will display "hello" to the user and prompt them to make some gesture.
+* How does X feel?
+  - It feels like a decent mirror, but the functionality can still be broden. 
+
+## Link to video in which the system fails
+### [video](https://youtu.be/qQaK5ORXFtI)
+
 ### Part 2.
 
 Following exploration and reflection from Part 1, finish building your interactive system, and demonstrate it in use with a video.
@@ -261,4 +279,9 @@ Following exploration and reflection from Part 1, finish building your interacti
 **\*\*\*Include a short video demonstrating the finished result.\*\*\***
 
 ### [link to video](https://www.youtube.com/watch?v=9FdLN01lGtw)
-### [link to video - version 2]()
+### [link to video - version 2](https://youtu.be/txl9n3r0igo)
+
+### Improvements in part s
+- Instead of one quote to one gesture, I randomized the quote so that each time the user changes the gesture, there will be a different quote displaying. 
+- I optimized the parameters of gesture detection, so that the "coyote" and "I love you" sign can be distinguished more precisely.
+- Also I added a new feature - the mirror, which is the popup screen in VNC viewer from raspberry pi, will display "hello" when the system is not actively detecting a hand, to make the mirror more interactive.
