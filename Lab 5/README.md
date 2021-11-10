@@ -254,6 +254,8 @@ During the lecture, we mentioned questions to help characterize a material:
 
 **\*\*\*Include a short video demonstrating the answers to these questions.\*\*\***
 
+### Link to video in which the system fails
+#### [video](https://youtu.be/qQaK5ORXFtI)
 * What can you use X for?
   - For self motivating purposes; to cheer yourself up.
 * What is a good environment for X?
@@ -269,8 +271,7 @@ During the lecture, we mentioned questions to help characterize a material:
 * How does X feel?
   - It feels like a decent mirror, but the functionality can still be broden. 
 
-## Link to video in which the system fails
-### [video](https://youtu.be/qQaK5ORXFtI)
+
 
 ### Part 2.
 
