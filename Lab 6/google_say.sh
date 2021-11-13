@@ -5,5 +5,3 @@ say() { local IFS=+;/usr/bin/mplayer -ao alsa -really-quiet -noconsolecontrols "
 #say $*
 # say " This mission is too important for me to allow you to jeopardize it."
 say $1
-# 
-# espeak -ven+f2 -a 200 -k5 -s150 --stdout $1 | aplay

@@ -86,6 +86,12 @@ Once connected, you should be able to see all the messages under the IDD topic. 
 
 **\*\*\*Consider how you might use this messaging system on interactive devices, and draw/write down 5 ideas here.\*\*\***
 
+1. Use the proximity sensor to detect people approaching, and signals to the receiver when the reader sends messages.
+2. Use the message sending system as a ditital invisible notebook. The user can record the message via the system, either using voice (with the speech2text system) or text message. Then, with approximy sensor, the message will display when it detects the user approaching. 
+3. The message delivery system can be exploited as a simple game engine. For example, Pong or Flappy Bird ([reference](http://www.grantjenks.com/docs/freegames/)). The display of the game can be either on the MiniPiTFT Display or the VCN viewer screen, and players can control the game with the joystick. 
+4. It enables 
+5. 
+
 ### Part C
 ### Streaming a Sensor
 

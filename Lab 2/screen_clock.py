@@ -8,7 +8,6 @@ from time import strftime, sleep
 import webcolors, os
 from adafruit_rgb_display.rgb import color565
 from datetime import datetime, timezone, timedelta, date
-import pytz
 import json
 
 # Configuration for CS and DC pins (these are FeatherWing defaults on M0/M4):
