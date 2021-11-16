@@ -55,6 +55,7 @@ Once connected, you should be able to see all the messages under the IDD topic. 
 ![publish settings](imgs/mqtt_explorer_2.png?raw=true)
 
 
+
 ### Part B
 ### Send and Receive on your Pi
 
@@ -86,11 +87,11 @@ Once connected, you should be able to see all the messages under the IDD topic. 
 
 **\*\*\*Consider how you might use this messaging system on interactive devices, and draw/write down 5 ideas here.\*\*\***
 
-1. Use the proximity sensor to detect people approaching, and signals to the receiver when the reader sends messages.
+1. This can be used as a message recording system. Use the proximity sensor to detect people approaching, and signals to the receiver when the reader sends messages.
 2. Use the message sending system as a ditital invisible notebook. The user can record the message via the system, either using voice (with the speech2text system) or text message. Then, with approximy sensor, the message will display when it detects the user approaching. 
 3. The message delivery system can be exploited as a simple game engine. For example, Pong or Flappy Bird ([reference](http://www.grantjenks.com/docs/freegames/)). The display of the game can be either on the MiniPiTFT Display or the VCN viewer screen, and players can control the game with the joystick. 
-4. It enables 
-5. 
+4. As a message storage system, it enables live students to ask questions to the teacher, and then teacher will get notified when the number of certain questions exceeds certain amount. 
+5. We can also implement a real-time shipping information update system. The deveriry workers update the up-to-date information of the shipment, and on the other hand, the customers can check the state of their orders. 
 
 ### Part C
 ### Streaming a Sensor
@@ -113,8 +114,13 @@ Plug in the capacitive sensor board with the Qwiic connector. Use the alligator 
 
 **\*\*\*Include a picture of your setup here: what did you see on MQTT Explorer?\*\*\***
 
+#### Screen shot of using MQTT
+![Screen shot of using MQTT](./MQTT_Explorer.png)
+
 **\*\*\*Pick another part in your kit and try to implement the data streaming with it.\*\*\***
 
+#### Picture of streaming the data using the joystick and capacity sensor. 
+![picture of streaming the data](./stream.jpg)
 
 ### Part D
 ### The One True ColorNet
@@ -147,19 +153,25 @@ Of course not! You can go to [https://one-true-colornet.glitch.me/](https://one-
 
 **\*\*\*Can you set up the script that can read the color anyone else publish and display it on your screen?\*\*\***
 
+Yes. The script is in `color.py`. It reads the color that is detected by the sensor and publish it onto the server in the format of RGB.
+
 
 ### Part E
 ### Make it your own
 
 Find at least one class (more are okay) partner, and design a distributed application together based on the exercise we asked you to do in this lab.
 
-**\*\*\*1. Explain your design\*\*\*** For example, if you made a remote controlled banana piano, explain why anyone would want such a thing.
+**\*\*\*1. Explain your design\*\*\***
+For example, if you made a remote controlled banana piano, explain why anyone would want such a thing.
 
 **\*\*\*2. Diagram the architecture of the system.\*\*\*** Be clear to document where input, output and computation occur, and label all parts and connections. For example, where is the banana, who is the banana player, where does the sound get played, and who is listening to the banana music?
 
 **\*\*\*3. Build a working prototype of the system.\*\*\*** Do think about the user interface: if someone encountered these bananas somewhere in the wild, would they know how to interact with them? Should they know what to expect?
 
 **\*\*\*4. Document the working prototype in use.\*\*\*** It may be helpful to record a Zoom session where you should the input in one location clearly causing response in another location.
+
+
+[Link to Part E (Google doc)](https://docs.google.com/document/d/1nQdgjQ9m0TT1B0PDPrExZJsch-rpzFhQhaeeweAnlbA/edit?usp=sharing)
 
 <!--**\*\*\*5. BONUS (Wendy didn't approve this so you should probably ignore it)\*\*\*** get the whole class to run your code and make your distributed system BIGGER.-->
 
