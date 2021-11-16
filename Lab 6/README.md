@@ -171,6 +171,8 @@ For example, if you made a remote controlled banana piano, explain why anyone wo
 **\*\*\*4. Document the working prototype in use.\*\*\*** It may be helpful to record a Zoom session where you should the input in one location clearly causing response in another location.
 
 
+## Team: Evan Lin (cl2629), Ethan Huang (eh543)
+
 [Link to Part E (Google doc)](https://docs.google.com/document/d/1nQdgjQ9m0TT1B0PDPrExZJsch-rpzFhQhaeeweAnlbA/edit?usp=sharing)
 
 [Video Demo](https://www.youtube.com/watch?v=ewKLFeLzs0g)
