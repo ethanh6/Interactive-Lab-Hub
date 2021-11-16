@@ -120,6 +120,7 @@ Plug in the capacitive sensor board with the Qwiic connector. Use the alligator 
 **\*\*\*Pick another part in your kit and try to implement the data streaming with it.\*\*\***
 
 #### Picture of streaming the data using the joystick and capacity sensor. 
+#### Data streaming code: `part_c.py`
 ![picture of streaming the data](./stream.jpg)
 
 ### Part D
