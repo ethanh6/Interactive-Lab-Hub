@@ -173,5 +173,7 @@ For example, if you made a remote controlled banana piano, explain why anyone wo
 
 [Link to Part E (Google doc)](https://docs.google.com/document/d/1nQdgjQ9m0TT1B0PDPrExZJsch-rpzFhQhaeeweAnlbA/edit?usp=sharing)
 
+[Video Demo](https://www.youtube.com/watch?v=ewKLFeLzs0g)
+
 <!--**\*\*\*5. BONUS (Wendy didn't approve this so you should probably ignore it)\*\*\*** get the whole class to run your code and make your distributed system BIGGER.-->
 
