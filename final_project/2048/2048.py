@@ -51,11 +51,11 @@ tileMatrix = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
 undoMat = []
 
 # joystick
-joystick = qwiic_joystick.QwiicJoystick()
+js = qwiic_joystick.QwiicJoystick()
 
 def get_control():
 	# joystick
-	x, y = joystick.horizontal, joystick.vertical
+	x, y = js.horizontal, js.vertical
 	if (x<200 and (y>300 and y<700)): return True, pygame.K_h
 	if (x>800 and (y>300 and y<700)): return True, pygame.K_l
 	if (y<200 and (x>300 and x<700)): return True, pygame.K_k
@@ -69,10 +69,10 @@ def main():
 	printMatrix()
 
 	# joystick
-	if not joystick.connected:
+	if not js.connected:
 		print("Joystick is not connected")
 		return
-	joystick.begin()
+	js.begin()
 	print("joystick initialized")
 
 	while True:
@@ -87,33 +87,28 @@ def main():
 				pygame.quit()
 				sys.exit()
 			# game over condition
-			elif (event.type == KEYDOWN and event.key == K_e):
+			elif (event.type == KEYDOWN and event.key == K_e) or (not checkIfCanGo()):
 				printGameOver()
 			
-			# elif (event.type == KEYDOWN) :
-			# 	print(event.key, type(event.key))
+			# handle event
+			if event.type == KEYDOWN and isArrow_or_HJKL(event.key):
 
-			if checkIfCanGo():
-				if event.type == KEYDOWN and isArrow_or_HJKL(event.key):
+				rotations = getRotations(event.key)
 
-					rotations = getRotations(event.key)
+				addToUndo()
 
-					addToUndo()
+				for i in range(0, rotations):
+					rotateMatrixClockwise()
 
-					for i in range(0, rotations):
-						rotateMatrixClockwise()
+				if canMove():
+					moveTiles()
+					mergeTiles()
+					placeRandomTile()
 
-					if canMove():
-						moveTiles()
-						mergeTiles()
-						placeRandomTile()
+				for j in range(0, (4 - rotations) % 4):
+					rotateMatrixClockwise()
 
-					for j in range(0, (4 - rotations) % 4):
-						rotateMatrixClockwise()
-
-					printMatrix()
-			else:
-				printGameOver()
+				printMatrix()
 
 			if event.type == KEYDOWN:
 				global BOARD_SIZE
