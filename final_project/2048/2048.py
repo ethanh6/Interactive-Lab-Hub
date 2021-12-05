@@ -1,13 +1,18 @@
-# 2048 Game written using the Pygame module
-# 
-# Lewis Deane
-# 23/12/2014
-
+from __future__ import print_function
 import pygame, sys, time
 from pygame import color
 from pygame import key
 from pygame.locals import *
 from random import *
+
+import os, qwiic_joystick, time, sys, webcolors, uuid, json
+import paho.mqtt.client as mqtt
+import board, busio, adafruit_mpr121
+import time, subprocess, digitalio, board
+from PIL import Image, ImageDraw, ImageFont
+import adafruit_rgb_display.st7789 as st7789
+from time import strftime, sleep
+from adafruit_rgb_display.rgb import color565
 
 # colours
 BLACK = (0, 0, 0)
@@ -45,41 +50,68 @@ scorefont = pygame.font.SysFont("monospace", 50)
 tileMatrix = [[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
 undoMat = []
 
+# joystick
+joystick = qwiic_joystick.QwiicJoystick()
+
+def get_control():
+	# joystick
+	x, y = joystick.horizontal, joystick.vertical
+	if (x<200 and (y>300 and y<700)): return True, pygame.K_h
+	if (x>800 and (y>300 and y<700)): return True, pygame.K_l
+	if (y<200 and (x>300 and x<700)): return True, pygame.K_k
+	if (y>800 and (x>300 and x<700)): return True, pygame.K_j
+
+	return False, 98
+
 def main():
 
 	placeRandomTile()
 	printMatrix()
 
+	# joystick
+	if not joystick.connected:
+		print("Joystick is not connected")
+		return
+	joystick.begin()
+	print("joystick initialized")
+
 	while True:
+		
+		# get control signal from circuit
+		cond, control = get_control()
+		print(cond, control)
+
 		for event in pygame.event.get():
 			# quit conditions
-			if event.type == QUIT or\
-				(event.type == KEYDOWN and event.key == K_ESCAPE):
+			if event.type == QUIT or (event.type == KEYDOWN and (event.key == K_ESCAPE or event.key == K_q)):
 				pygame.quit()
 				sys.exit()
-
+			# game over condition
 			elif (event.type == KEYDOWN and event.key == K_e):
 				printGameOver()
+			
+			# elif (event.type == KEYDOWN) :
+			# 	print(event.key, type(event.key))
 
 			if checkIfCanGo():
-				if event.type == KEYDOWN:
-					if isArrow(event.key):
-						rotations = getRotations(event.key)
+				if event.type == KEYDOWN and isArrow_or_HJKL(event.key):
 
-						addToUndo()
+					rotations = getRotations(event.key)
 
-						for i in range(0, rotations):
-							rotateMatrixClockwise()
+					addToUndo()
 
-						if canMove():
-							moveTiles()
-							mergeTiles()
-							placeRandomTile()
+					for i in range(0, rotations):
+						rotateMatrixClockwise()
 
-						for j in range(0, (4 - rotations) % 4):
-							rotateMatrixClockwise()
+					if canMove():
+						moveTiles()
+						mergeTiles()
+						placeRandomTile()
 
-						printMatrix()
+					for j in range(0, (4 - rotations) % 4):
+						rotateMatrixClockwise()
+
+					printMatrix()
 			else:
 				printGameOver()
 
@@ -97,6 +129,7 @@ def main():
 					undo()
 
 		pygame.display.update()
+
 
 def printMatrix():
 
@@ -123,7 +156,7 @@ def printGameOver():
 	label = scorefont.render("Game Over!", 1, (255,255,255))
 	label2 = scorefont.render("Score:" + str(TOTAL_POINTS), 1, (255,255,255))
 	label3 = myfont.render("Press r to restart!", 1, (255,255,255))
-	label4 = myfont.render("Press esc to quit", 1, (255,255,255))
+	label4 = myfont.render("Press esc or q to quit", 1, (255,255,255))
 
 	SURFACE.blit(label, (50, 100))
 	SURFACE.blit(label2, (50, 200))
@@ -214,7 +247,7 @@ def rotateMatrixClockwise():
 			tileMatrix[k][BOARD_SIZE - 1 - i] = temp3
 			tileMatrix[i][k] = temp4
 
-def isArrow(k):
+def isArrow_or_HJKL(k):
 	return(k == pygame.K_UP or k == pygame.K_DOWN or k == pygame.K_LEFT or k == pygame.K_RIGHT \
 	or k == pygame.K_k or k == pygame.K_j or k == pygame.K_h or k == pygame.K_l)
 

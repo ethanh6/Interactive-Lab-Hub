@@ -3,16 +3,32 @@
 - Game engine reference: [my past course project](https://github.com/ethanh6/Adversarial_Search_2048_Game)
 - Created using pygame
 
+# setup
+### setup X forwarding
+	- putty config -> connection -> SSH -> X11, enable X!! forwarding
+### Set display var
+	- export DISPLAY=:<local addr>:0.0
+	- my local addr: 172.26.176.1
+### enable venv
+	```
+	$ cd
+	$ source circuitpython/bin/activate
+	```
+
 # to run the game
 ```python 2048.py```
 
 # movements in the game
 - Arrow keys
 - VIM movements (h: LEFT, j: DOWN, k: UP, l: RIGHT)
+- controled by joystick (to be implemented)
+- controled by sound (to be implemented)
+- controled by gesture (to be implemented)
+- controled by capacity sensor (to be implemented)
 
 # options in game
 - `r` to restart the game.
 - `u` to undo a movement.
 - `3 ~ 7` to adjust board size (e.g. `3` will change to 3x3 board).
 - `e` to jump to game over page.
-- `ESC` to quit the game.
+- `ESC` or `q` to quit the game.
