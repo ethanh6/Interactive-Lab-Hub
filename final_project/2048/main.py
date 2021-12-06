@@ -94,6 +94,7 @@ def get_joystick():
 	if (x>800 and (y>300 and y<700)): return True, pygame.K_RIGHT
 	if (y<200 and (x>300 and x<700)): return True, pygame.K_UP
 	if (y>800 and (x>300 and x<700)): return True, pygame.K_DOWN
+	if (js.button == 0): return True, pygame.K_u # push to undo
 	return False, 98
 
 def get_hand_direction(thumbX, thumbY, pointerX, pointerY):
@@ -138,17 +139,21 @@ def main():
 		cond, control = get_joystick()
 		if cond:
 			print_signal("joystick", control)
-			rotations = getRotations(control)
-			addToUndo()
-			for i in range(0, rotations):
-				rotateMatrixClockwise()
-			if canMove():
-				moveTiles()
-				mergeTiles()
-				placeRandomTile()
-			for j in range(0, (4 - rotations) % 4):
-				rotateMatrixClockwise()
-			printMatrix()
+			if isArrow_or_HJKL(control):
+				rotations = getRotations(control)
+				addToUndo()
+				for i in range(0, rotations):
+					rotateMatrixClockwise()
+				if canMove():
+					moveTiles()
+					mergeTiles()
+					placeRandomTile()
+				for j in range(0, (4 - rotations) % 4):
+					rotateMatrixClockwise()
+				printMatrix()
+			else:
+				if control == pygame.K_u:
+					undo()
 			pygame.display.update()
 			time.sleep(0.2)
 			continue

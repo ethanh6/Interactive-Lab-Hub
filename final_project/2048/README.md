@@ -30,8 +30,11 @@
 - Arrow keys
 - VIM movements (h: LEFT, j: DOWN, k: UP, l: RIGHT)
 - controled by joystick
+	- push button to undo movement
 - controled by gesture 
-- controled by sound (not done)
+	- issue: FPS too low
+- controled by sound
+	- issue: speech to text module not accurate
 - controled by capacity sensor
 	- 0: up
 	- 1: down
