@@ -21,9 +21,9 @@
 # movements in the game
 - Arrow keys
 - VIM movements (h: LEFT, j: DOWN, k: UP, l: RIGHT)
-- controled by joystick (to be implemented)
+- controled by joystick
 - controled by sound (to be implemented)
-- controled by gesture (to be implemented)
+- controled by gesture 
 - controled by capacity sensor (to be implemented)
 
 # options in game

@@ -4,8 +4,7 @@ from pygame import color
 from pygame import key
 from pygame.locals import *
 from random import *
-
-import os, qwiic_joystick, time, sys, webcolors, uuid, json
+import os, qwiic_joystick, time, sys, webcolors, uuid, json, wave
 import paho.mqtt.client as mqtt
 import board, busio, adafruit_mpr121
 import time, subprocess, digitalio, board
@@ -13,6 +12,26 @@ from PIL import Image, ImageDraw, ImageFont
 import adafruit_rgb_display.st7789 as st7789
 from time import strftime, sleep
 from adafruit_rgb_display.rgb import color565
+import cv2, math
+import numpy as np
+import HandTrackingModule as htm
+from ctypes import cast, POINTER
+import alsaaudio, adafruit_apds9960.apds9960
+from vosk import Model, KaldiRecognizer
+
+# camera input
+m = alsaaudio.Mixer()
+wCam, hCam = 640, 480
+cap = cv2.VideoCapture(0)
+cap.set(3, wCam)
+cap.set(4, hCam)
+pTime = 0
+detector = htm.handDetector(detectionCon=0.7)
+minVol = 0
+maxVol = 100
+vol = 0
+volBar = 400
+volPer = 0
 
 # colours
 BLACK = (0, 0, 0)
@@ -28,11 +47,12 @@ ORANGE = (255, 152, 0)
 DEEP_ORANGE = (255, 87, 34)
 BROWN = (121, 85, 72)
 
-colour_dict = { 0:BLACK, 2:RED, 4:PINK, 8:PURPLE, 16:DEEP_PURPLE, 32:BLUE, 64:TEAL, 128:L_GREEN, 256:GREEN, 512:ORANGE, 1024: DEEP_ORANGE, 2048:BROWN}
-
 COLOR = BLUE
 
 def getColour(i):
+	colour_dict = { 0:BLACK, 2:RED, 4:PINK, 8:PURPLE,
+	16:DEEP_PURPLE, 32:BLUE, 64:TEAL, 128:L_GREEN,
+	256:GREEN, 512:ORANGE, 1024: DEEP_ORANGE, 2048:BROWN }
 	return colour_dict[i]
 
 TOTAL_POINTS = 0
@@ -52,35 +72,100 @@ undoMat = []
 
 # joystick
 js = qwiic_joystick.QwiicJoystick()
+if not js.connected:
+	print("Joystick is not connected")
+	exit(1)
+js.begin()
+print("joystick initialized")
 
-def get_control():
-	# joystick
+def get_joystick():
 	x, y = js.horizontal, js.vertical
-	if (x<200 and (y>300 and y<700)): return True, pygame.K_h
-	if (x>800 and (y>300 and y<700)): return True, pygame.K_l
-	if (y<200 and (x>300 and x<700)): return True, pygame.K_k
-	if (y>800 and (x>300 and x<700)): return True, pygame.K_j
-
+	if (x<200 and (y>300 and y<700)): return True, pygame.K_LEFT
+	if (x>800 and (y>300 and y<700)): return True, pygame.K_RIGHT
+	if (y<200 and (x>300 and x<700)): return True, pygame.K_UP
+	if (y>800 and (x>300 and x<700)): return True, pygame.K_DOWN
 	return False, 98
 
-def main():
+def get_hand_direction(thumbX, thumbY, pointerX, pointerY):
+	hypot = math.hypot(abs(thumbX-pointerX), abs(thumbY-pointerY))
+	deg = math.degrees(math.asin(abs(pointerY-thumbY)/(hypot+0.00001)))
+	if deg < 15:
+		return pygame.K_LEFT if pointerX > thumbX else pygame.K_RIGHT
+	elif deg > 75:
+		return pygame.K_DOWN if pointerY > thumbY else pygame.K_UP
+	return None	
 
+def get_sound_signal():
+	pass
+
+def print_signal(name, signal):
+	d = "up" if signal==pygame.K_UP else "down" if signal==pygame.K_DOWN else \
+		"right" if signal==pygame.K_RIGHT else "left"
+	print("Source: {},  Direction: {}".format(name, d))
+
+def main():
+	global pTime
 	placeRandomTile()
 	printMatrix()
-
-	# joystick
-	if not js.connected:
-		print("Joystick is not connected")
-		return
-	js.begin()
-	print("joystick initialized")
-
 	while True:
+		##########################
+		### get joystick signal ##
+		##########################
+		cond, control = get_joystick()
+		if cond:
+			print_signal("joystick", control)
+			rotations = getRotations(control)
+			addToUndo()
+			for i in range(0, rotations):
+				rotateMatrixClockwise()
+			if canMove():
+				moveTiles()
+				mergeTiles()
+				placeRandomTile()
+			for j in range(0, (4 - rotations) % 4):
+				rotateMatrixClockwise()
+			printMatrix()
+			pygame.display.update()
+			time.sleep(0.2)
+			continue
 		
-		# get control signal from circuit
-		cond, control = get_control()
-		print(cond, control)
+		#######################
+		## get camera signal ##
+		#######################
+		success, img = cap.read()
+		img = detector.findHands(img)
+		lmList = detector.findPosition(img, draw=False)
+		direction = None
+		if len(lmList) != 0:
+			thumbX, thumbY = lmList[4][1], lmList[4][2] 
+			pointerX, pointerY = lmList[8][1], lmList[8][2]
+			direction = get_hand_direction(thumbX, thumbY, pointerX, pointerY)
+		cTime = time.time()
+		fps, pTime = 1 / (cTime - pTime), cTime
+		cv2.putText(img, "FPS={}".format(round(fps, 2)), (40, 50), cv2.FONT_HERSHEY_COMPLEX, 1, (0,0,0), 3)
+		cv2.imshow("Img", img)
+		cv2.waitKey(1)
 
+		if direction!= None:
+			print_signal("camera", direction)
+			rotations = getRotations(direction)
+			addToUndo()
+			for i in range(0, rotations):
+				rotateMatrixClockwise()
+			if canMove():
+				moveTiles()
+				mergeTiles()
+				placeRandomTile()
+			for j in range(0, (4 - rotations) % 4):
+				rotateMatrixClockwise()
+			printMatrix()
+			pygame.display.update()
+			time.sleep(1.0)
+			continue
+
+		#########################
+		## get keyboard signal ##
+		#########################
 		for event in pygame.event.get():
 			# quit conditions
 			if event.type == QUIT or (event.type == KEYDOWN and (event.key == K_ESCAPE or event.key == K_q)):
@@ -92,31 +177,28 @@ def main():
 			
 			# handle event
 			if event.type == KEYDOWN and isArrow_or_HJKL(event.key):
-
+				print_signal("keyboard", event.key)
 				rotations = getRotations(event.key)
-
 				addToUndo()
-
 				for i in range(0, rotations):
 					rotateMatrixClockwise()
-
 				if canMove():
 					moveTiles()
 					mergeTiles()
 					placeRandomTile()
-
 				for j in range(0, (4 - rotations) % 4):
 					rotateMatrixClockwise()
-
 				printMatrix()
 
 			if event.type == KEYDOWN:
 				global BOARD_SIZE
 
+				# reset board
 				if event.key == pygame.K_r:
 					reset()
 
-				if 50 < event.key and 56 > event.key:
+				# adjust boardsize
+				elif 50 < event.key and 56 > event.key:
 					BOARD_SIZE = event.key - 48
 					reset()
 
