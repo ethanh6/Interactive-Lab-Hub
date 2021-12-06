@@ -30,9 +30,15 @@
 - Arrow keys
 - VIM movements (h: LEFT, j: DOWN, k: UP, l: RIGHT)
 - controled by joystick
-- controled by sound (to be implemented)
 - controled by gesture 
-- controled by capacity sensor (to be implemented)
+- controled by sound (not done)
+- controled by capacity sensor
+	- 0: up
+	- 1: down
+	- 2: left
+	- 3: right
+	- 4: undo
+	- 5: end game 
 
 # options in game
 - `r` to restart the game.

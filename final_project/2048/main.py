@@ -78,6 +78,16 @@ if not js.connected:
 js.begin()
 print("joystick initialized")
 
+# capacity sensor
+i2c = busio.I2C(board.SCL, board.SDA)
+capSensor = adafruit_mpr121.MPR121(i2c)
+# print("testing cap sensor")
+# while True:
+#     for i in range(12):
+#         if capSensor[i].value:
+#             print("Twizzler {} touched! value={}".format(i, capSensor[i]))
+#     time.sleep(0.25)  # Small delay to keep from spamming output messages.
+
 def get_joystick():
 	x, y = js.horizontal, js.vertical
 	if (x<200 and (y>300 and y<700)): return True, pygame.K_LEFT
@@ -98,10 +108,24 @@ def get_hand_direction(thumbX, thumbY, pointerX, pointerY):
 def get_sound_signal():
 	pass
 
+def get_cap_signal():
+	if capSensor[0].value: return pygame.K_UP
+	if capSensor[1].value: return pygame.K_DOWN
+	if capSensor[2].value: return pygame.K_LEFT
+	if capSensor[3].value: return pygame.K_RIGHT
+	if capSensor[4].value: return pygame.K_u   # undo
+	if capSensor[5].value: return pygame.K_e   # end the game
+	return None
+
 def print_signal(name, signal):
-	d = "up" if signal==pygame.K_UP else "down" if signal==pygame.K_DOWN else \
-		"right" if signal==pygame.K_RIGHT else "left"
-	print("Source: {},  Direction: {}".format(name, d))
+	d = { pygame.K_UP: "up", 
+			pygame.K_DOWN: "down",
+			pygame.K_RIGHT: "right",
+			pygame.K_LEFT: "left", 
+			pygame.K_u: "undo", 
+			pygame.K_e: "end game",
+			pygame.K_q: "quit game"}
+	print("Source: {},  Direction: {}".format(name, d[signal]))
 
 def main():
 	global pTime
@@ -161,6 +185,32 @@ def main():
 			printMatrix()
 			pygame.display.update()
 			time.sleep(1.0)
+			continue
+
+		#######################
+		## get capacity signal ##
+		#######################
+		cap_signal = get_cap_signal()
+		if cap_signal != None:
+			print_signal("capacity sensor", cap_signal)
+			if isArrow_or_HJKL(cap_signal):
+				rotations = getRotations(cap_signal)
+				addToUndo()
+				for i in range(0, rotations):
+					rotateMatrixClockwise()
+				if canMove():
+					moveTiles()
+					mergeTiles()
+					placeRandomTile()
+				for j in range(0, (4 - rotations) % 4):
+					rotateMatrixClockwise()
+				printMatrix()
+			else:
+				if   cap_signal == pygame.K_u: undo()           # undo
+				elif cap_signal == pygame.K_e: printGameOver()  # game over
+
+			pygame.display.update()
+			time.sleep(0.4)
 			continue
 
 		#########################
