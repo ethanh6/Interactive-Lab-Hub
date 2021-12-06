@@ -18,6 +18,10 @@ import HandTrackingModule as htm
 from ctypes import cast, POINTER
 import alsaaudio, adafruit_apds9960.apds9960
 from vosk import Model, KaldiRecognizer
+import adafruit_mpu6050
+
+i2c = board.I2C()
+mpu = adafruit_mpu6050.MPU6050(i2c)
 
 # camera input
 m = alsaaudio.Mixer()
@@ -123,8 +127,15 @@ def print_signal(name, signal):
 			pygame.K_DOWN: "down",
 			pygame.K_RIGHT: "right",
 			pygame.K_LEFT: "left", 
+
+			pygame.K_k: "up",
+			pygame.K_j: "down",
+			pygame.K_l: "right",
+			pygame.K_h: "left",
+
 			pygame.K_u: "undo", 
 			pygame.K_e: "end game",
+			pygame.K_r: "reset game",
 			pygame.K_q: "quit game"}
 	print("Source: {},  Direction: {}".format(name, d[signal]))
 
@@ -231,34 +242,35 @@ def main():
 				printGameOver()
 			
 			# handle event
-			if event.type == KEYDOWN and isArrow_or_HJKL(event.key):
-				print_signal("keyboard", event.key)
-				rotations = getRotations(event.key)
-				addToUndo()
-				for i in range(0, rotations):
-					rotateMatrixClockwise()
-				if canMove():
-					moveTiles()
-					mergeTiles()
-					placeRandomTile()
-				for j in range(0, (4 - rotations) % 4):
-					rotateMatrixClockwise()
-				printMatrix()
-
 			if event.type == KEYDOWN:
-				global BOARD_SIZE
+				print_signal("keyboard", event.key)
+				if isArrow_or_HJKL(event.key):
+					rotations = getRotations(event.key)
+					addToUndo()
+					for i in range(0, rotations):
+						rotateMatrixClockwise()
+					if canMove():
+						moveTiles()
+						mergeTiles()
+						placeRandomTile()
+					for j in range(0, (4 - rotations) % 4):
+						rotateMatrixClockwise()
+					printMatrix()
 
-				# reset board
-				if event.key == pygame.K_r:
-					reset()
+				else:
+					global BOARD_SIZE
 
-				# adjust boardsize
-				elif 50 < event.key and 56 > event.key:
-					BOARD_SIZE = event.key - 48
-					reset()
+					# reset board
+					if event.key == pygame.K_r:
+						reset()
 
-				elif event.key == pygame.K_u:
-					undo()
+					# adjust boardsize
+					elif 50 < event.key and 56 > event.key:
+						BOARD_SIZE = event.key - 48
+						reset()
+
+					elif event.key == pygame.K_u:
+						undo()
 
 		pygame.display.update()
 
