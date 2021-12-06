@@ -15,8 +15,16 @@
 	$ source circuitpython/bin/activate
 	```
 
+# mic and speaker settings
+### record audio
+	- arecord --format=S16_LE --duration=5 --rate=16000 --file-type=raw out.raw
+### play audio
+	- aplay --format=S16_LE --rate=16000 out.raw
+### adjust volumn 
+	- amixer set Master 100%
+
 # to run the game
-```python 2048.py```
+```python main.py```
 
 # movements in the game
 - Arrow keys
