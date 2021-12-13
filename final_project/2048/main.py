@@ -20,8 +20,8 @@ import alsaaudio, adafruit_apds9960.apds9960
 from vosk import Model, KaldiRecognizer
 import adafruit_mpu6050
 
-i2c = board.I2C()
-mpu = adafruit_mpu6050.MPU6050(i2c)
+# i2c = board.I2C()
+# mpu = adafruit_mpu6050.MPU6050(i2c)
 
 # camera input
 m = alsaaudio.Mixer()
