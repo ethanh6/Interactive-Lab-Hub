@@ -1,29 +1,40 @@
 
 # 2048 Game
-- Game engine reference: [my past course project](https://github.com/ethanh6/Adversarial_Search_2048_Game)
-- Created using pygame
 
-# setup
-### setup X forwarding
-	- putty config -> connection -> SSH -> X11, enable X11 forwarding
-	- download and open XMING server
-	
-### enable venv (optional)
-	```
-	$ cd
-	$ source circuitpython/bin/activate
-	```
+# Introduction
+This is the classic 2048 game, which is initially developed by Gabriele Cirulli. The objective of the game is to slide and combine the same tiles to reach 2048, but players can continue to play after reaching the goal. 
 
-# mic and speaker settings
-### record audio
-	- arecord --format=S16_LE --duration=5 --rate=16000 --file-type=raw out.raw
-### play audio
-	- aplay --format=S16_LE --rate=16000 out.raw
-### adjust volumn 
-	- amixer set Master 100%
+Originally the player can play only with the arrow keys, now the game has been augmented so that the player can play with multiple control input: joystick, vim-movement, touch sensor, even with their hand with camera!
 
-# to run the game
-```python main.py```
+I implemented the game engine in [my game engine project](https://github.com/ethanh6/Adversarial_Search_2048_Game) using Pygame and OpenCV. Now the player can play the game with different sensors which is connected to the Raspberry Pi server, and since the raspberry pi is connected headlessly, the main game screen will be forwarded to my laptop using X11 forwarding. 
+
+# What you will need
+	1. Raspberry Pi
+	2. Capacity Sensor
+	3. SparkFun Qwiic Joystick
+	4. Camera
+	5. Banana connector
+	6. MiniPi TFT display
+	7. Laptop
+	8. Internet connection
+
+# Setup X forwarding using Putty and XMing on Windows 11
+	1. [download](https://sourceforge.net/projects/xming/) and open XMing as X11 display server.
+	2. In Putty
+		- make sure the laptop and the Raspberry Pi is under the same network. 
+		- configuration -> connection -> SSH -> X11 -> check "enable X11 forwarding"
+		- type in the IP of the Raspberry Pi, and start the SSH connection
+	3. Clone the project
+      	- ```git clone https://github.com/ethanh6/Interactive-Lab-Hub.git```
+	4. Connect camera to Raspberry Pi
+	5. Streamline the capacity sensor and the joystick
+	6. Connect the banana connector to the capacity sensor 0 to 5.
+
+# To run the game
+```
+$ cd Interactive-Lab-Hub/final_project/2048
+$ python main.py
+```
 
 # movements in the game
 - Arrow keys
