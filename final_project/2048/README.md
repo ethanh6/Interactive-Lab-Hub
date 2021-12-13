@@ -6,10 +6,9 @@
 # setup
 ### setup X forwarding
 	- putty config -> connection -> SSH -> X11, enable X11 forwarding
-### Set display var
-	- export DISPLAY=<local addr>:0.0
-	- my local addr: 172.26.176.1
-### enable venv
+	- download and open XMING server
+	
+### enable venv (optional)
 	```
 	$ cd
 	$ source circuitpython/bin/activate
