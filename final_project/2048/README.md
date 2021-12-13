@@ -1,6 +1,8 @@
 
 # 2048 Game
 
+![machine pic](./imgs/machine.jpg)
+
 # Introduction
 This is the classic 2048 game, which is initially developed by Gabriele Cirulli. The objective of the game is to slide and combine the same tiles to reach 2048, but players can continue to play after reaching the goal. 
 
@@ -61,6 +63,9 @@ $ (2048) pi@ixe00~/Interactive-Lab-Hub/final_project/2048: python main.py
 
 > You should be able to see a main game window camera windows pop up.
 
+![screen](./imgs/screen.jpg)
+![gameplay](./imgs/game_play.jpg)
+
 # How to play the game
 
 ## Rule
@@ -97,7 +102,7 @@ The game will end if there is no further movements you can perform.
 
 # Application Architecture
 
-[]()
+![App Architecture](./imgs/archi.jpg)
 
 # Documentation of Design Process
 
