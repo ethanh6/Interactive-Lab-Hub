@@ -80,7 +80,7 @@ The game will end if there is no further movements you can perform.
 
 ## Keyboard
 - Arrow keys
-- VIM movements (h: LEFT, j: DOWN, k: UP, l: RIGHT)
+- VIM movements (`h`: LEFT, `j`: DOWN, `k`: UP, `l`: RIGHT)
 - `r` to restart the game.
 - `u` to undo a movement.
 - `3 ~ 7` to adjust board size, default board size=4 (e.g. `3` will change to 3x3 board).
@@ -199,7 +199,7 @@ This is an interesting project to work on, and it is always intriguing to experi
 
 I spent tremendous amount of time working on the game engine, and I believe that this project does help me better understand the pygame module. 
 
-To implement a game with various control, I think the crutial thing to recognize is to find the best control input with the right machine. For example, the joystick and keyboard work the best in terms of reaction time and user experience. 
+To implement a game with various control, I think the crucial thing to recognize is to find the best control input with the right machine. For example, the joystick and keyboard work the best in terms of reaction time and user experience. 
 
 Besides the interaction part, I have learnt a lot other knowledges such as SSH with X11 fowrarding, OpenCV and Pygame design throughout the project.
 
