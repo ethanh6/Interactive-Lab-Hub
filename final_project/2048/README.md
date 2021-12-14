@@ -49,6 +49,8 @@ I implemented the game engine in [my game engine project](https://github.com/eth
 
 3. Connect the banana connector to the capacity sensor 0 to 5.
 
+4. Connect to the same network as your laptop
+
 
 # Setup the project
 ```
@@ -114,13 +116,16 @@ The game will end if there is no further movements you can perform.
 ![cap sensor](./imgs/capsensor.jpg)
 ![cap sensor inside](./imgs/cap_inside.jpg)
 
+
 # Application Architecture
 
 ![App Architecture](./imgs/archi.jpg)
 
+
 # State Diagram
 
 ![State Diagram](./imgs/state.jpg)
+
 
 # Documentation
 
