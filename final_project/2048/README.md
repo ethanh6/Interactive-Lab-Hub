@@ -32,7 +32,7 @@ I implemented the game engine in [my game engine project](https://github.com/eth
 8. Internet connection
 
 
-# Setup X11 forwarding 
+# Setup X11 forwarding on Windows 11
 
 1. [download](https://sourceforge.net/projects/xming/) and open XMing as X11 display server.
 
@@ -72,7 +72,9 @@ $ (2048) pi@ixe00~/Interactive-Lab-Hub/final_project/2048: python main.py
 # How to play the game
 
 ## Rule
-Move the tile to merge the same numbers, you win if reach 2048, and you can still play to reach higher score than that.
+Move the tile to merge the same numbers, you win if reach 2048. 
+
+You can still play to achieve higher score than 2048.
 
 The game will end if there is no further movements you can perform.
 
@@ -88,6 +90,8 @@ The game will end if there is no further movements you can perform.
 ## Joystick
 - Move the joystick to move the tile.
 - push button to undo movement
+
+![js](./imgs/joystick.jpg)
 
 ## Gesture 
 - Use your finger to point to the direction you want to move the tile (up, down left, right).
@@ -106,6 +110,9 @@ The game will end if there is no further movements you can perform.
 	- 3: right
 	- 4: undo
 	- 5: end game 
+
+![cap sensor](./imgs/capsensor.jpg)
+![cap sensor inside](./imgs/cap_inside.jpg)
 
 # Application Architecture
 
@@ -159,7 +166,7 @@ Initially, I wanted to design a Pacman game with various control inputs. However
 
 Instead, I turned to another game that does not require instant movement detection - 2048, with the same inputs that are used to be in Pacman. 
 
-As for the game engine, I re-used the 2048 game that I implemented in a previous course written in Pygame, with augmentations that accept extra input such as joystick and capacity sensor. It took me about 3 days to finalized the main game engine setup, with joystick and capacity sensor successfully installed.
+As for the game engine, I re-used the 2048 game that I implemented in a previous course written in Pygame, with augmentations that accept extra input such as joystick and capacity sensor. It took me about 3 days to finalized the main game engine setup, with joystick and capacity sensor successfully installed. Also I added Vim-movements since I'm a vim lover.
 
 The first obstable that I encourtered is how to foward the raspberry pi display, from Pygame, to my laptop using SSH. Initially, I connected a monitor to the Pi to develop the game, but obviously, headless mode would be the optimal way to demostrate the project as well as to develop on my laptop. It actually took me two days to finalized the X11 forwarding settings since I was not familiar with this technologies. This is the main reason why the machine did not work in the day of project demo, but the problem has been fixed now.
 
@@ -168,18 +175,6 @@ When I implemented the gesture detection feature, I realized that the low FPS wo
 The next problem I faced is to implement voice control feature. In the ideal situation, the player can say, for example, "right" or "up". to move the tile. However, the Vosk module did not work as expected - it's able to detect numbers, but it doesn't recognize words like "left" and "down". It took me another two days to try implementing this feature, but I eventually removed it not only because the accuracy issue, but also the concern that combining voice recognition and gesture detection might even drain the performance of Pi. 
 
 There is also a problem that slightly lower the player's experience - it took about 7 seconds for the program to start. I believed it is due to the performance of the Raspberry Pi.
-
-## Reflection
-
-> What have you learned or wish you knew at the start of the project?
-
-This is an interesting project to work on, and it is always intriguing to experiment with different inputs. The main functionality such as joystick, keyboard input and capacity sensor are easier to implement than voice control and gesture detection, however, the latter part is more interesting. 
-
-I spent tremendous amount of time working on the game engine, and I believe that this project does help me better understand the pygame module. 
-
-To implement a game with various control, I think the crutial thing to recognize is to find the best control input with the right machine. For example, the joystick and keyboard work the best in terms of reaction time and user experience. 
-
-Besides the interaction part, I think I have learnt a lot other knowledges such as SSH with X11 fowrarding, OpenCV and Pygame design throughout the project.
 
 ## Change of Design
 
@@ -196,6 +191,19 @@ Besides the interaction part, I think I have learnt a lot other knowledges such 
 5. Improve 2048 animation.
 
 
+## Reflection and Conclusion
+
+> What have you learned or wish you knew at the start of the project?
+
+This is an interesting project to work on, and it is always intriguing to experiment with different inputs. The main functionality such as joystick, keyboard input and capacity sensor are easier to implement than voice control and gesture detection, however, the latter part is more interesting. 
+
+I spent tremendous amount of time working on the game engine, and I believe that this project does help me better understand the pygame module. 
+
+To implement a game with various control, I think the crutial thing to recognize is to find the best control input with the right machine. For example, the joystick and keyboard work the best in terms of reaction time and user experience. 
+
+Besides the interaction part, I have learnt a lot other knowledges such as SSH with X11 fowrarding, OpenCV and Pygame design throughout the project.
+
+
 # Team
 
 Ethan Huang (eh543)
@@ -207,4 +215,4 @@ Ethan Huang (eh543)
 
 Player credit: Kristjan Tomasson
 
-> Hope you enjoy the video and thank you for this semester!
+> Hope you enjoy the project and thank you for this semester!
